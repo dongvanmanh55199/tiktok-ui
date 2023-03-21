@@ -1,0 +1,54 @@
+.wrapper {
+   //    width: 100%;
+   //    flex: 1;
+}
+.inner {
+   padding-top: 20px;
+   padding-right: 8px;
+}
+
+.header {
+   display: flex;
+}
+
+.avatar {
+   width: 56px;
+   height: 56px;
+   border-radius: 50%;
+   object-fit: cover;
+}
+
+.container {
+   margin: 0px 8px;
+}
+
+.name {
+}
+
+.description {
+}
+
+.wrapper-video {
+}
+
+.video {
+   margin-top: 9px;
+   border-radius: 6px;
+   border: 1px solid rgba(0, 0, 0, 0.04);
+   width: 300px;
+}
+
+.action {
+}
+
+.likes {
+}
+
+.comments {
+}
+
+.share {
+}
+
+.btn-follow {
+}
