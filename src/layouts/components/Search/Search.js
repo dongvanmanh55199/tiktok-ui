@@ -10,7 +10,7 @@ import * as searchServices from '~/services/searchService'
 import 'tippy.js/dist/tippy.css'
 
 import styles from './Search.module.scss'
-import { Wrapper as PoperWrapper } from '~/components/Poper'
+import { Wrapper as PopperWrapper } from '~/components/Popper'
 import AccountItem from '../AccountItem'
 import { useDebounce } from '~/hooks'
 import { SearchIcon } from '~/components/Icons'
@@ -78,12 +78,12 @@ function Search() {
             placement="auto"
             render={(attrs) => (
                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                  <PoperWrapper>
+                  <PopperWrapper>
                      <h4 className={cx('search-title')}>Account</h4>
                      {searchResult.map((result) => (
                         <AccountItem key={result.id} data={result} />
                      ))}
-                  </PoperWrapper>
+                  </PopperWrapper>
                </div>
             )}
             onClickOutside={handleHideResult}

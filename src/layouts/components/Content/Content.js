@@ -18,6 +18,7 @@ function Content() {
          setVideoList(data)
       })
    }, [])
+   console.log(videoList)
    return (
       <div className={cx('wrapper')}>
          <div className={cx('inner')}>

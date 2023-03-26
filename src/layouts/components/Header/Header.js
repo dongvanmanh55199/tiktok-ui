@@ -21,7 +21,7 @@ import 'tippy.js/dist/tippy.css'
 import styles from './Header.module.scss'
 import img from '~/assets/images'
 
-import Menu from '~/components/Poper/Menu'
+import Menu from '~/components/Popper/Menu'
 import Button from '~/components/Button'
 import Image from '~/components/Image'
 import Search from '../Search'

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Tippy from '@tippyjs/react/headless'
 
-import { Wrapper as PoperWrapper } from '~/components/Poper'
+import { Wrapper as PopperWrapper } from '~/components/Popper'
 
 import MenuItem from './MenuItem'
 import Header from './Header'
@@ -42,7 +42,7 @@ function Menu({ children, hideOnClick = false, items = [], onChange = defaultFn 
          placement="bottom-end"
          render={(attrs) => (
             <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-               <PoperWrapper className={cx('menu-popper')}>
+               <PopperWrapper className={cx('menu-popper')}>
                   {history.length > 1 && (
                      <Header
                         title={current.title}
@@ -52,7 +52,7 @@ function Menu({ children, hideOnClick = false, items = [], onChange = defaultFn 
                      />
                   )}
                   <div className={cx('menu-body')}>{renderItems()}</div>
-               </PoperWrapper>
+               </PopperWrapper>
             </div>
          )}
          onHidden={() => setHistory((prev) => prev.slice(0, 1))}

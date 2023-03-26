@@ -5,7 +5,7 @@ import classNames from 'classnames/bind'
 
 import Tippy from '@tippyjs/react/headless'
 
-import { Wrapper as PopperWrapper } from '../Poper'
+import { Wrapper as PopperWrapper } from '../Popper'
 
 import styles from './SuggestedAccounts.module.scss'
 import Image from '../Image'
