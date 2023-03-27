@@ -10,7 +10,7 @@ import {
    LinkRoundedIcon,
    PaperPlaneIcon,
 } from '~/components/Icons'
-import Wrapper from '~/components/Popper'
+import { Wrapper as PopperWrapper } from '~/components/Popper'
 import images from '~/assets/images'
 
 const cx = classNames.bind(styles)
@@ -79,7 +79,7 @@ function ShareAction({ children, offset }) {
          zIndex="99"
          render={(attrs) => (
             <div tabIndex="-1" {...attrs}>
-               <Popper className={cx('share-tab')}>
+               <PopperWrapper className={cx('share-tab')}>
                   <div className={cx('share-wrapper')}>
                      {expanded
                         ? EXPANDED_SHARE_MENU.map((item, index) => {
@@ -103,7 +103,7 @@ function ShareAction({ children, offset }) {
                         </div>
                      )}
                   </div>
-               </Popper>
+               </PopperWrapper>
             </div>
          )}
          onHide={() => setExpanded(false)}
