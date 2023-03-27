@@ -1,10 +1,3 @@
-// import Content from '~/layouts/components/Content'
-// function Home() {
-//    return <Content />
-// }
-
-// export default Home
-
 import { useState, useEffect } from 'react'
 import classNames from 'classnames/bind'
 
