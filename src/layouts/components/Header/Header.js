@@ -25,6 +25,7 @@ import Menu from '~/components/Popper/Menu'
 import Button from '~/components/Button'
 import Image from '~/components/Image'
 import Search from '../Search'
+import { ModalContext } from '~/components/ModalProvider'
 
 import {
    HelpIcon,
@@ -36,6 +37,7 @@ import {
 } from '~/components/Icons'
 
 import config from '~/config'
+import { useContext } from 'react'
 const cx = classNames.bind(styles)
 const MENU_ITEMS = [
    {
@@ -74,6 +76,7 @@ const MENU_ITEMS = [
 ]
 function Header() {
    const currentUser = false
+   const context = useContext(ModalContext)
 
    const handleMenuChange = (menuItem) => {
       switch (menuItem.type) {
@@ -145,8 +148,14 @@ function Header() {
                   </>
                ) : (
                   <>
-                     <Button text>Upload</Button>
-                     <Button primary leftIcon={<FontAwesomeIcon icon={faSignIn} />}>
+                     <Button onClick={context.handleShowModal} text>
+                        Upload
+                     </Button>
+                     <Button
+                        onClick={context.handleShowModal}
+                        primary
+                        leftIcon={<FontAwesomeIcon icon={faSignIn} />}
+                     >
                         Log in
                      </Button>
                   </>

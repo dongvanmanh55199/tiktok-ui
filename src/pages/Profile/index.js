@@ -26,7 +26,7 @@ function Profile() {
    const data = location.pathname
    const [videos, setVideos] = useState([])
    const context = useContext(ModalContext)
-   const [info, setInfo] = useState({})
+   const [info, setInfo] = useState()
 
    useEffect(() => {
       fetch(`https://tiktok.fullstack.edu.vn/api/users${data}`)
@@ -36,51 +36,60 @@ function Profile() {
             setVideos(json.data.videos)
          })
    }, [data])
-   console.log(info)
+
    return (
       <div className={cx('wrapper')}>
          <div className={cx('info-container')}>
-            <div className={cx('info')}>
-               <div className={cx('basic')}>
-                  <Image className={cx('avatar')} src={data.avatar} alt={data.avatar} />
-                  <div className={cx('text')}>
-                     <div className={cx('username')}>{data.nickname}</div>
-                     <div className={cx('name')}>
-                        {data.full_name || `${data.first_name} ${data.last_name}`}
+            {info && (
+               <div className={cx('info')}>
+                  <div className={cx('basic')}>
+                     <Image
+                        className={cx('avatar')}
+                        src={info.data.avatar}
+                        alt={data.avatar}
+                     />
+                     <div className={cx('text')}>
+                        <div className={cx('username')}>{info.data.nickname}</div>
+                        <div className={cx('name')}>
+                           {info.data.full_name ||
+                              `${info.data.first_name} ${info.data.last_name}`}
+                        </div>
+                        <Button
+                           primary
+                           style={{ minWidth: '208px' }}
+                           onClick={context.handleShowModal}
+                        >
+                           Follow
+                        </Button>
                      </div>
-                     <Button
-                        primary
-                        style={{ minWidth: '208px' }}
-                        onClick={context.handleShowModal}
-                     >
-                        Follow
-                     </Button>
                   </div>
-               </div>
 
-               <div className={cx('counts')}>
-                  <div className={cx('following')}>
-                     <strong>{data.followings_count}</strong> Following
-                  </div>
-                  <div className={cx('followers')}>
-                     <strong>{data.followers_count}</strong> Followers
-                  </div>
-                  <div className={cx('likes')}>
-                     <strong>{data.likes_count}</strong> Likes
-                  </div>
-               </div>
-
-               <div className={cx('bio')}>{data.bio ? data.bio : 'No bio yet.'}</div>
-
-               <a href={data.website_url} target="blank">
-                  {data.website_url && (
-                     <div className={cx('website')}>
-                        <LinkIcon className={cx('link-icon')} />
-                        {data.website_url}
+                  <div className={cx('counts')}>
+                     <div className={cx('following')}>
+                        <strong>{info.data.followings_count}</strong> Following
                      </div>
-                  )}
-               </a>
-            </div>
+                     <div className={cx('followers')}>
+                        <strong>{info.data.followers_count}</strong> Followers
+                     </div>
+                     <div className={cx('likes')}>
+                        <strong>{info.data.likes_count}</strong> Likes
+                     </div>
+                  </div>
+
+                  <div className={cx('bio')}>
+                     {info.data.bio ? info.data.bio : 'No bio yet.'}
+                  </div>
+
+                  <a href={data.website_url} target="blank">
+                     {info.data.website_url && (
+                        <div className={cx('website')}>
+                           <LinkIcon className={cx('link-icon')} />
+                           {info.data.website_url}
+                        </div>
+                     )}
+                  </a>
+               </div>
+            )}
             <div className={cx('side-btns')}>
                <div className={cx('share-btn')}>
                   <ShareAction offset={[-100, 10]}>

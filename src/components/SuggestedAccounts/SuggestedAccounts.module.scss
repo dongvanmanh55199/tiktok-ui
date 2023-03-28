@@ -1,55 +1,92 @@
 .wrapper {
-   border-top: 1px solid #e3e3e4;
-}
-
-.label {
-   font-size: 1.4rem;
    padding: 8px;
-   font-weight: 600;
-}
-
-//AccountItem
-
-.account-item {
    display: flex;
-   padding: 8px;
    cursor: pointer;
+   align-items: center;
+   border-radius: 4px;
+
+   .info {
+      height: 32px;
+   }
+
+   &:hover {
+      background: rgba(22, 24, 35, 0.03);
+   }
 }
 
 .avatar {
    width: 32px;
    height: 32px;
    border-radius: 50%;
+   margin-right: 12px;
    object-fit: cover;
 }
 
-.item-info {
-   flex: 1;
-   margin-left: 12px;
-}
-
-.nickname {
-   margin-top: 0px;
-   line-height: 1;
+.username {
    font-size: 1.6rem;
-   color: #161823;
-}
-.check {
-   margin-left: 4px;
-   font-size: 1.4rem;
-   //    color: var(--primary);
-   color: #20d5ec;
+   margin-top: -4px;
+   font-weight: 600;
 }
 
 .name {
    font-size: 1.2rem;
-   color: #161823bf;
+
+   line-height: 15px;
+
+   color: rgba(22, 24, 35, 0.5);
+   font-weight: 400;
 }
 
-.more-btn {
-   padding: 8px;
-   font-size: 1.4rem;
-   font-weight: 600;
-   color: #fe2c55;
-   cursor: pointer;
+.verified {
+   color: #20d5ec;
+   margin-left: 5px;
+   width: 14px;
+   height: 14px;
+   margin-bottom: 3px;
+}
+
+//Tippy CSS
+.account-tab {
+   width: 320px;
+   padding: 20px;
+
+   .header {
+      display: flex;
+      margin-bottom: 12px;
+      justify-content: space-between;
+      align-items: center;
+   }
+
+   .tippy-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+   }
+
+   .tippy-username {
+      font-size: 1.8rem;
+      font-weight: 700;
+   }
+
+   .tippy-name {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+   }
+
+   .user-stats {
+      display: flex;
+      margin-top: 8px;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 20px;
+   }
+
+   .bold {
+      font-weight: 700;
+   }
+
+   .follower-stats {
+      margin-right: 15px;
+   }
 }

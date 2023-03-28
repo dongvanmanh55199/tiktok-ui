@@ -11,5 +11,6 @@ const img = {
    telegram: require('~/assets/images/telegram.svg').default,
    twitter: require('~/assets/images/twitter.svg').default,
    whatsapp: require('~/assets/images/whatsapp.svg').default,
+   facebook: require('~/assets/images/facebook.svg').default,
 }
 export default img
