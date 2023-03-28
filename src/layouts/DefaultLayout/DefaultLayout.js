@@ -16,8 +16,8 @@ function DefaultLayout({ children }) {
          <div className={cx('container')}>
             <SideBar />
             <div className={cx('content')}>{children}</div>
-            <GetApp />
          </div>
+         <GetApp />
          {context.active && <ModalForm onHide={context.handleHideModal} />}
       </div>
    )

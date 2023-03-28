@@ -24,7 +24,12 @@
    background-color: rgb(255, 255, 255);
    animation: showLoginForm 0.33s linear, hidden 0.23s linear;
 }
-
+.btn-custom {
+   border: 1px solid rgba(22, 24, 35, 0.12);
+   + .btn-custom {
+      margin-left: 0;
+   }
+}
 .container {
    width: 483px;
    height: 100%;

@@ -28,12 +28,14 @@ import Search from '../Search'
 import { ModalContext } from '~/components/ModalProvider'
 
 import {
+   MoreIcon,
    HelpIcon,
    LanguageIcon,
    ShortBoardIcon,
    UploadIcon,
    MessageIcon,
    InboxIcon,
+   PlusIcon,
 } from '~/components/Icons'
 
 import config from '~/config'
@@ -55,6 +57,171 @@ const MENU_ITEMS = [
                type: 'language',
                code: 'vi',
                title: 'Tieng Viet',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'العربية',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'বাঙ্গালি (ভারত)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Cebuano (Pilipinas)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Čeština (Česká republika)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Deutsch',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Ελληνικά (Ελλάδα)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Español',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Suomi (Suomi)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Filipino (Pilipinas)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Français',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'עברית (ישראל)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'हिंदी',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Magyar (Magyarország)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Bahasa Indonesia (Indonesia)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Italiano (Italia)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: '日本語（日本）',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Basa Jawa (Indonesia)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'ខ្មែរ (កម្ពុជា)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: '한국어 (대한민국)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Bahasa Melayu (Malaysia)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'မြန်မာ (မြန်မာ)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Nederlands (Nederland)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Polski (Polska)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Português (Brasil)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Română (Romania)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Русский (Россия)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Svenska (Sverige)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'ไทย (ไทย)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Türkçe (Türkiye)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'Українська (Україна)',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: 'اردو',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: '简体中文',
+            },
+            {
+               type: 'language',
+               code: 'vi',
+               title: '繁體中文',
             },
          ],
       },
@@ -148,7 +315,11 @@ function Header() {
                   </>
                ) : (
                   <>
-                     <Button onClick={context.handleShowModal} text>
+                     <Button
+                        outline
+                        leftIcon={<PlusIcon />}
+                        onClick={context.handleShowModal}
+                     >
                         Upload
                      </Button>
                      <Button
@@ -173,7 +344,8 @@ function Header() {
                      />
                   ) : (
                      <button className={cx('more-btn')}>
-                        <FontAwesomeIcon icon={faEllipsisVertical} />
+                        {/* <FontAwesomeIcon icon={faEllipsisVertical} /> */}
+                        <MoreIcon />
                      </button>
                   )}
                </Menu>

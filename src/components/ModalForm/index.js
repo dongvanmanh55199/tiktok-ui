@@ -126,6 +126,7 @@ function ModalForm({ onHide }) {
                      {filteredForm.contents?.map((content, index) => {
                         return (
                            <Button
+                              className={cx('btn-custom')}
                               style={{ height: '44px', marginBottom: '16px' }}
                               key={index}
                               onClick={content.onClick}

@@ -171,7 +171,7 @@ function Video({ data, mute, volume, adjustVolume, toggleMuted }) {
                   <div className={cx('caption')}>{data?.description}</div>
                   <div className={cx('music')}>
                      <MusicIcon className={cx('icon')} />
-                     {data?.music}
+                     {data?.music || `Music by ${data?.user.nickname}`}
                   </div>
                </div>
 
@@ -226,20 +226,28 @@ function Video({ data, mute, volume, adjustVolume, toggleMuted }) {
 
                <div className={cx('actions')}>
                   <div className={cx('action-btn')}>
-                     <Button rounded onClick={context.handleShowModal}>
+                     <Button
+                        className={cx('custom-btn')}
+                        rounded
+                        onClick={context.handleShowModal}
+                     >
                         <HeartIcon />
                      </Button>
                      <p className={cx('numbers')}>{data?.likes_count}</p>
                   </div>
                   <div className={cx('action-btn')}>
-                     <Button rounded onClick={context.handleShowModal}>
+                     <Button
+                        className={cx('custom-btn')}
+                        rounded
+                        onClick={context.handleShowModal}
+                     >
                         <CommentIcon />
                      </Button>
                      <p className={cx('numbers')}>{data?.comments_count}</p>
                   </div>
                   <ShareAction offset={[90, 0]}>
                      <div className={cx('action-btn')}>
-                        <Button rounded>
+                        <Button className={cx('custom-btn')} rounded>
                            <ShareSolidIcon />
                         </Button>
                         <p className={cx('numbers')}>{data?.shares_count}</p>

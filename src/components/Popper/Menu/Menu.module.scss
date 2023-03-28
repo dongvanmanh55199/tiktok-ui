@@ -1,47 +1,48 @@
 .menu-list {
-    width: 240px;
-    .menu-item {
-        margin-left: 0;
-    }
+   width: 240px;
+   .menu-item {
+      margin-left: 0;
+   }
 }
 
 .menu-popper {
-    padding-bottom: 8px;
+   padding-bottom: 8px;
 }
 
 .menu-body {
-    overflow-y: auto;
+   overflow-y: auto;
 }
 .menu-item {
-    width: 100%;
-    justify-content: flex-start;
-    font-weight: 600;
-    line-height: 1.8rem;
-    padding: 11px 18px;
-    &.separate {
-        border-top: 1px solid rgba(22, 24, 35, 0.12);
-    }
-    &:hover {
-        background-color: rgba(22, 24, 35, 0.03);
-    }
+   width: 100%;
+   justify-content: flex-start;
+   font-weight: 500;
+   line-height: 1.8rem;
+   padding: 11px 18px;
+   text-align: left;
+   &.separate {
+      border-top: 1px solid rgba(22, 24, 35, 0.12);
+   }
+   &:hover {
+      background-color: rgba(22, 24, 35, 0.03);
+   }
 }
 
 //Header
 .header {
-    position: relative;
-    height: 50px;
-    margin-top: -8px;
-    flex-shrink: 0;
+   position: relative;
+   height: 50px;
+   margin-top: -8px;
+   flex-shrink: 0;
 }
 .back-btn {
-    width: 50px;
-    height: 100%;
-    background-color: transparent;
-    cursor: pointer;
+   width: 50px;
+   height: 100%;
+   background-color: transparent;
+   cursor: pointer;
 }
 .header-title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
 }
