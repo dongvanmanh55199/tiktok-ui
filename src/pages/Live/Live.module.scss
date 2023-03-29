@@ -1,0 +1,119 @@
+.wrapper {
+   height: 600px;
+   width: 100%;
+   background-color: #f1f1f1;
+   position: relative;
+   border-radius: 6px;
+}
+.inner {
+   height: 100%;
+   margin: 20px;
+}
+.heart {
+   position: absolute;
+   right: 60px;
+   bottom: 90px;
+
+   transform: translate3d(0px, 0px, 0px);
+
+   animation: heart linear 1.5s infinite;
+}
+@keyframes heartLoad {
+   0% {
+      transform: translateY(0);
+   }
+   50% {
+      transform: translateY(50);
+   }
+   100% {
+      transform: translateY(100);
+   }
+}
+.view {
+}
+.info {
+   position: absolute;
+   bottom: 100px;
+   left: 50px;
+}
+.live {
+   width: 55px;
+   font-size: 2rem;
+   font-weight: 700;
+   color: var(--white);
+   background-color: #c5c6c8;
+   padding: 4px;
+   border-radius: 4px;
+}
+.line-a {
+   position: relative;
+   margin-top: 20px;
+   height: 20px;
+   width: 200px;
+   background-color: #e4e4e5;
+
+   border-radius: 999px;
+   &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 2;
+      width: 70%;
+      height: 20px;
+      // background-color: red;
+      left: 0;
+      top: 0;
+      border-radius: 999px;
+      // background-color: rgba(22, 24, 35, 0.08);
+      background-image: linear-gradient(
+         90deg,
+         rgba(22, 24, 35, 0),
+         rgba(22, 24, 35, 0.08) 50%,
+         rgba(22, 24, 35, 0)
+      );
+      animation: liveLoad linear 1.5s infinite;
+   }
+}
+@keyframes liveLoad {
+   10% {
+      opacity: 0.5;
+      transform: translateX(0%);
+   }
+   20% {
+      opacity: 1;
+      transform: translateX(50%);
+   }
+   35% {
+      opacity: 0;
+      transform: translateX(100%);
+   }
+}
+.line-b {
+   position: relative;
+   margin-top: 20px;
+   height: 20px;
+   width: 400px;
+   border-radius: 999px;
+
+   background-color: #e4e4e5;
+
+   &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 2;
+      width: 70%;
+      height: 20px;
+      left: 0;
+      top: 0;
+      border-radius: 999px;
+      // background-color: rgba(22, 24, 35, 0.08);
+      background-image: linear-gradient(
+         90deg,
+         rgba(22, 24, 35, 0),
+         rgba(22, 24, 35, 0.08) 50%,
+         rgba(22, 24, 35, 0)
+      );
+      animation: liveLoad linear 3s infinite;
+   }
+}

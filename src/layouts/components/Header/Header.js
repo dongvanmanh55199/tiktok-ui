@@ -319,6 +319,7 @@ function Header({ stretch }) {
                         outline
                         leftIcon={<PlusIcon />}
                         onClick={context.handleShowModal}
+                        // to={config.routes.upload}
                      >
                         Upload
                      </Button>

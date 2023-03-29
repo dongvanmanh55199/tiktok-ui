@@ -1,9 +1,12 @@
 .wrapper {
-   width: 1100px;
    box-shadow: rgb(0 0 0 / 6%) 0px 2px 8px;
    border-radius: 8px;
    background-color: rgb(255, 255, 255);
    padding: 24px 56px;
+   margin-left: -114px;
+   margin-right: 160px;
+   padding: 50px;
+   box-shadow: #0000000f 0px 2px 8px;
 }
 
 .title {
@@ -88,4 +91,71 @@
    span {
       margin-bottom: 6px;
    }
+}
+.form {
+   margin-left: 30px;
+}
+.caption-input {
+   padding: 0 20px;
+   margin-top: 6px;
+   border: 1px solid #ccc;
+   height: 40px;
+}
+.cover-wrap,
+.caption-wrap,
+.music,
+.privacy,
+.switch-wrap,
+.copyright-wrap {
+   margin-top: 20px;
+   display: flex;
+   flex-direction: column;
+}
+.cover-input {
+   padding: 0 20px;
+   text-align: start;
+   margin-top: 6px;
+   border: 1px solid #ccc;
+   height: 200px;
+   pointer-events: none;
+}
+.switch-wrap-input {
+   width: 20px;
+   height: 20px;
+   accent-color: var(--primary);
+   padding: 5px;
+   ~ .switch-wrap-input {
+      margin-left: 20px;
+   }
+}
+.privacy-input {
+   margin-top: 6px;
+   height: 40px;
+   width: 300px;
+}
+.switch-wrap-label {
+   margin-left: 6px;
+
+   font-size: 2rem;
+}
+
+.music-input {
+   padding: 0 20px;
+   margin-top: 6px;
+   border: 1px solid #ccc;
+   height: 40px;
+}
+.title {
+   font-size: 1.8rem;
+   font-weight: 600;
+   color: var(--black);
+}
+.privacy-input,
+.privacy-input-value {
+   font-size: 2rem;
+   padding: 5px;
+}
+.switch-wrap-container {
+   display: flex;
+   align-items: center;
 }

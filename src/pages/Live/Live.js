@@ -11,9 +11,9 @@ function Live() {
          <div className={cx('inner')}>
             <div className={cx('view')}></div>
             <div className={cx('info')}>
-               <p></p>
-               <p></p>
-               <p></p>
+               <p className={cx('live')}>LIVE</p>
+               <p className={cx('line-a')}></p>
+               <p className={cx('line-b')}></p>
             </div>
             <div className={cx('heart')}>
                <img src={img.heart} />

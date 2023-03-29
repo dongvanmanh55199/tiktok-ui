@@ -3,6 +3,7 @@ import config from '~/config'
 //Layout
 import { HeaderLayout } from '~/layouts'
 import StretchLayout from '~/layouts/StretchLayout'
+import HeaderStretchLayout from '~/layouts/HeaderStretchLayout'
 
 // Page
 import Home from '~/pages/Home'
@@ -37,7 +38,7 @@ const publicRoutes = [
    {
       path: config.routes.upload,
       component: Upload,
-      layout: HeaderLayout,
+      layout: HeaderStretchLayout,
    },
    {
       path: config.routes.search,
