@@ -2,6 +2,7 @@ import config from '~/config'
 
 //Layout
 import { HeaderLayout } from '~/layouts'
+import StretchLayout from '~/layouts/StretchLayout'
 
 // Page
 import Home from '~/pages/Home'
@@ -31,6 +32,7 @@ const publicRoutes = [
    {
       path: config.routes.live,
       component: Live,
+      layout: StretchLayout,
    },
    {
       path: config.routes.upload,

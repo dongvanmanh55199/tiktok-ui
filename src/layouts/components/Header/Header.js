@@ -241,7 +241,7 @@ const MENU_ITEMS = [
       title: 'Keyboard shortcuts',
    },
 ]
-function Header() {
+function Header({ stretch }) {
    const currentUser = false
    const context = useContext(ModalContext)
 
@@ -282,7 +282,7 @@ function Header() {
    ]
    return (
       <header className={cx('wrapper')}>
-         <div className={cx('inner')}>
+         <div className={cx('inner', { stretch: stretch })}>
             <Link to={config.routes.home} className={cx('logo-link')}>
                <img src={img.logo} alt="Logo" />
             </Link>
