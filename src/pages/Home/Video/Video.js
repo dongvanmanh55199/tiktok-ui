@@ -99,7 +99,7 @@ function Video({ data, mute, volume, adjustVolume, toggleMuted }) {
                               interactive
                               hideOnClick="false"
                               placement="bottom"
-                              delay={[1000, 0]}
+                              delay={[600, 0]}
                               offset={[40, 30]}
                               zIndex="99"
                               render={(attrs) => (
@@ -114,7 +114,6 @@ function Video({ data, mute, volume, adjustVolume, toggleMuted }) {
 
                                           <Button
                                              primary
-                                             outline
                                              onClick={context.handleShowModal}
                                           >
                                              Follow

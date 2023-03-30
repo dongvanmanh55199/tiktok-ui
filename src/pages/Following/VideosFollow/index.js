@@ -6,6 +6,7 @@ import Button from '~/components/Button'
 import sugarVideo from '~/assets/video'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 const cx = classNames.bind(styles)
 
 function VideosFollow({ data }) {
@@ -14,7 +15,12 @@ function VideosFollow({ data }) {
       <>
          {data &&
             data.map((videoItem) => (
-               <div key={videoItem.id} className={cx('video-item')}>
+               <Link
+                  to={`/@${videoItem.nickname}`}
+                  state={data?.user}
+                  key={videoItem.id}
+                  className={cx('video-item')}
+               >
                   <Image
                      src={videoItem.popular_video.thumb_url}
                      className={cx('video-background')}
@@ -42,7 +48,7 @@ function VideosFollow({ data }) {
                      </div>
                      <Button primary>Follow</Button>
                   </div>
-               </div>
+               </Link>
             ))}
       </>
    )

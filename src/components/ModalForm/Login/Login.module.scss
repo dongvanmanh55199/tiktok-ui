@@ -1,0 +1,34 @@
+.email {
+   font-size: 1.6rem;
+   font-weight: 500;
+   margin-bottom: 20px;
+   display: flex;
+   flex-direction: column;
+}
+.email-label {
+}
+.email-input,
+.password-input {
+   margin-top: 10px;
+   height: 20px;
+   width: 100%;
+   background-color: #f3f3f3;
+   padding: 20px;
+   font-size: 1.6rem;
+   border-radius: 6px;
+}
+.btn-custom {
+   margin-top: 20px;
+}
+.password-label {
+}
+.password-input {
+}
+.forgotpass {
+   font-size: 1.2rem;
+   font-weight: 600;
+   margin-top: 10px;
+   &:hover {
+      text-decoration: underline;
+   }
+}

@@ -6,6 +6,8 @@ import styles from './ModalForm.module.scss'
 import images from '~/assets/images'
 import Button from '~/components/Button'
 import { Link } from 'react-router-dom'
+import Login from './Login'
+import Register from './Register'
 
 const cx = classNames.bind(styles)
 
@@ -26,6 +28,17 @@ function ModalForm({ onHide }) {
                {
                   icon: <UserIcon />,
                   title: 'Use phone / email / username',
+                  // children: {
+                  //    type: 'Login',
+                  //    data: [
+                  //       {
+                  //          title: '',
+                  //       },
+                  //    ],
+                  // },
+                  onClick: function () {
+                     setFormLoginState('Login')
+                  },
                },
                {
                   icon: <img src={images.facebook} alt="" />,
@@ -58,6 +71,14 @@ function ModalForm({ onHide }) {
             ],
          },
          {
+            type: 'Login',
+            title: 'Login',
+         },
+         {
+            type: 'Register',
+            title: 'Register',
+         },
+         {
             type: 'register',
             title: 'Sign up for TikTok',
             showMore: true,
@@ -65,6 +86,9 @@ function ModalForm({ onHide }) {
                {
                   icon: <UserIcon />,
                   title: 'Use phone or email',
+                  onClick: function () {
+                     setFormLoginState('Register')
+                  },
                },
                {
                   icon: <img src={images.facebook} alt="" />,
@@ -112,9 +136,9 @@ function ModalForm({ onHide }) {
 
    useEffect(() => {
       const newForm = loginRegisterForm.find((form) => form.type === formLoginState)
+      console.log(newForm)
       setFilteredForm(newForm)
    }, [loginRegisterForm, formLoginState])
-
    return (
       <div className={cx('modal-mask')}>
          <div className={cx('wrapper')}>
@@ -123,6 +147,8 @@ function ModalForm({ onHide }) {
                   <div className={cx('title')}>{filteredForm.title}</div>
 
                   <div className={cx('list')}>
+                     {formLoginState === 'Login' && <Login />}
+                     {formLoginState === 'Register' && <Register />}
                      {filteredForm.contents?.map((content, index) => {
                         return (
                            <Button
@@ -158,7 +184,6 @@ function ModalForm({ onHide }) {
                      </p>
                   </div>
                )}
-
                <div className={cx('footer')}>
                   {formLoginState === 'login' ? (
                      <>
@@ -171,6 +196,17 @@ function ModalForm({ onHide }) {
                         <p onClick={() => setFormLoginState('login')}>Log in</p>
                      </>
                   )}
+                  {/* {formLoginState === 'Login' ? (
+                     <>
+                        Don't have an account?{' '}
+                        <p onClick={() => setFormLoginState('Register')}> Register</p>{' '}
+                     </>
+                  ) : (
+                     <>
+                        Already have an account?{' '}
+                        <p onClick={() => setFormLoginState('Login')}>Log in</p>
+                     </>
+                  )} */}
                </div>
             </div>
 
