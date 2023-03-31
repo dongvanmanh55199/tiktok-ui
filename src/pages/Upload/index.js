@@ -1,21 +1,48 @@
+import { useRef, useState } from 'react'
 import classNames from 'classnames/bind'
 import Button from '~/components/Button'
 
 import styles from './Upload.module.scss'
+import VideoPreview from './VideoPreview'
 
 const cx = classNames.bind(styles)
 
 function Upload() {
+   const [infoVideo, setInfoVideo] = useState()
+   const inputRef = useRef()
+   // console.log(inputRef, inputRef && inputRef?.files[0])
+   console.log(infoVideo)
+   // console.log(inputRef.current.files)
+   // console.log(inputRef.current && inputRef.current.files[0])
+   const check = infoVideo && infoVideo.files[0]
+   // const check = inputRef.current && inputRef.current.files[0]
+   // const videoURL = check && URL.createObjectURL(check)
+   console.log(check)
    return (
       <div className={cx('wrapper')}>
+         {/* <video style={{ width: '300px' }} controls src={videoURL} /> */}
          <span className={cx('title')}>Upload video</span>
          <span className={cx('subtitle')}>Post a video to your account</span>
 
          <div className={cx('content')}>
             <div className={cx('uploader')}>
                <div className={cx('upload')}>
-                  <input type="file" accept="video/*" style={{ display: 'none' }} />
-                  <div className={cx('upload-card')}>
+                  <input
+                     ref={inputRef}
+                     type="file"
+                     accept="video/*"
+                     style={{ display: 'none' }}
+                  />
+                  <div
+                     onClick={() => {
+                        inputRef.current.click()
+                        console.log()
+                        setInfoVideo(inputRef.current)
+                     }}
+                     className={cx('upload-card')}
+                  >
+                     {check && <VideoPreview data={infoVideo} />}
+
                      <img
                         src="https://lf16-tiktok-common.ttwstatic.com/obj/tiktok-web-common-sg/ies/creator_center/svgs/cloud-icon1.ecf0bf2b.svg"
                         className={cx('cloud-icon')}

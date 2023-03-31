@@ -5,13 +5,16 @@ import reportWebVitals from './reportWebVitals'
 
 import GlobalStyles from './components/GlobalStyles'
 import { ModalProvider } from './components/ModalProvider'
+import { UserCurrent } from './components/UserCurrentContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
    // <React.StrictMode>
    <GlobalStyles>
       <ModalProvider>
-         <App />
+         <UserCurrent>
+            <App />
+         </UserCurrent>
       </ModalProvider>
    </GlobalStyles>,
    {

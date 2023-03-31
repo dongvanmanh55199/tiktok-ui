@@ -1,3 +1,4 @@
+import { useContext, useState } from 'react'
 import classNames from 'classnames/bind'
 import Tippy from '@tippyjs/react'
 import { Link } from 'react-router-dom'
@@ -5,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
    // faMagnifyingGlass,
    faSignIn,
-   faEllipsisVertical,
    // faEarthAsia,
    // faCircleQuestion,
    // faKeyboard,
@@ -26,6 +26,7 @@ import Button from '~/components/Button'
 import Image from '~/components/Image'
 import Search from '../Search'
 import { ModalContext } from '~/components/ModalProvider'
+import { UserCurrentContext } from '~/components/UserCurrentContext'
 
 import {
    MoreIcon,
@@ -39,7 +40,6 @@ import {
 } from '~/components/Icons'
 
 import config from '~/config'
-import { useContext } from 'react'
 const cx = classNames.bind(styles)
 const MENU_ITEMS = [
    {
@@ -242,18 +242,28 @@ const MENU_ITEMS = [
    },
 ]
 function Header({ stretch }) {
-   const currentUser = false
    const context = useContext(ModalContext)
+   const userContext = useContext(UserCurrentContext)
+   // // setCurrentUser(userContext.userCurrent)
+   // const [render, setRender] = useState()
 
+   // console.log(currentUser, userContext.userCurrent)
    const handleMenuChange = (menuItem) => {
-      switch (menuItem.type) {
-         case 'language':
-            break
-
-         default:
-            throw new Error('Invalid')
+      console.log(menuItem.title, menuItem.title == 'Log out')
+      if (menuItem.type === 'language') {
+         console.log(menuItem.title)
       }
-      console.log(menuItem)
+      // switch (menuItem.type) {
+      //    case 'language':
+      //       break
+
+      //    default:
+      //       throw new Error('Invalid')
+      // }
+      if (menuItem.title === 'Log out') {
+         userContext.userCurrent = false
+         userContext.dataUser = {}
+      }
    }
 
    const userMenu = [
@@ -276,7 +286,11 @@ function Header({ stretch }) {
       {
          icon: <FontAwesomeIcon icon={faSignOut} />,
          title: 'Log out',
-         to: '/logout',
+         // to: '/logout',
+         // onClick: function () {
+         //    userContext.userCurrent = false
+         //    userContext.dataUser = {}
+         // },
          separate: true,
       },
    ]
@@ -290,7 +304,7 @@ function Header({ stretch }) {
             <Search />
 
             <div className={cx('action')}>
-               {currentUser ? (
+               {userContext.userCurrent ? (
                   <>
                      <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
                         <button className={cx('action-btn')}>
@@ -318,8 +332,8 @@ function Header({ stretch }) {
                      <Button
                         outline
                         leftIcon={<PlusIcon />}
-                        onClick={context.handleShowModal}
-                        // to={config.routes.upload}
+                        // onClick={context.handleShowModal}
+                        to={config.routes.upload}
                      >
                         Upload
                      </Button>
@@ -332,13 +346,15 @@ function Header({ stretch }) {
                      </Button>
                   </>
                )}
+
                <Menu
-                  items={currentUser ? userMenu : MENU_ITEMS}
+                  items={userContext.userCurrent ? userMenu : MENU_ITEMS}
                   onChange={handleMenuChange}
                >
-                  {currentUser ? (
+                  {userContext.userCurrent ? (
                      <Image
-                        src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/7311f55e7cbfa803afb1e964dbf185c4.webp?x-expires=1678719600&x-signature=OmflogK2c4%2B4ImS73mD6Bv6Cvlg%3D"
+                        src={userContext.dataUser?.data?.avatar}
+                        // src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/7311f55e7cbfa803afb1e964dbf185c4.webp?x-expires=1678719600&x-signature=OmflogK2c4%2B4ImS73mD6Bv6Cvlg%3D"
                         alt="avt"
                         className={cx('user-avatar')}
                         // fallback="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"

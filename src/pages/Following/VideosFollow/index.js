@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 const cx = classNames.bind(styles)
 
 function VideosFollow({ data }) {
-   console.log(data)
+   // console.log(data)
    return (
       <>
          {data &&

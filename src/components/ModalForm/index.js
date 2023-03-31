@@ -136,7 +136,7 @@ function ModalForm({ onHide }) {
 
    useEffect(() => {
       const newForm = loginRegisterForm.find((form) => form.type === formLoginState)
-      console.log(newForm)
+      // console.log(newForm)
       setFilteredForm(newForm)
    }, [loginRegisterForm, formLoginState])
    return (
@@ -185,28 +185,30 @@ function ModalForm({ onHide }) {
                   </div>
                )}
                <div className={cx('footer')}>
-                  {formLoginState === 'login' ? (
+                  {formLoginState === 'login' && (
                      <>
                         Don't have an account?{' '}
                         <p onClick={() => setFormLoginState('register')}> Sign up</p>{' '}
                      </>
-                  ) : (
+                  )}
+                  {formLoginState === 'register' && (
                      <>
                         Already have an account?{' '}
                         <p onClick={() => setFormLoginState('login')}>Log in</p>
                      </>
                   )}
-                  {/* {formLoginState === 'Login' ? (
+                  {formLoginState === 'Login' && (
                      <>
                         Don't have an account?{' '}
                         <p onClick={() => setFormLoginState('Register')}> Register</p>{' '}
                      </>
-                  ) : (
+                  )}
+                  {formLoginState === 'Register' && (
                      <>
                         Already have an account?{' '}
                         <p onClick={() => setFormLoginState('Login')}>Log in</p>
                      </>
-                  )} */}
+                  )}
                </div>
             </div>
 

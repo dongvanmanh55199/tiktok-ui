@@ -22,10 +22,18 @@ function Menu({ children, hideOnClick = false, items = [], onChange = defaultFn 
             <MenuItem
                key={i}
                data={item}
+               // onClick={() => {
+               //    if (isParent) {
+               //       setHistory((prev) => [...prev, item.children])
+               //    } else {
+               //       onChange(item)
+               //    }
+               // }}
                onClick={() => {
                   if (isParent) {
                      setHistory((prev) => [...prev, item.children])
                   } else {
+                     console.log(item)
                      onChange(item)
                   }
                }}
