@@ -307,10 +307,18 @@ function Header({ stretch }) {
                {userContext.userCurrent ? (
                   <>
                      <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
-                        <button className={cx('action-btn')}>
+                        <Button to={config.routes.upload} className={cx('action-btn')}>
                            <UploadIcon />
-                           {/* <FontAwesomeIcon icon={faCloudUpload} /> */}
-                        </button>
+                        </Button>
+                        {/* <Button
+                           // className={cx('action-btn')}
+                           outline
+                           leftIcon={<PlusIcon />}
+                           // onClick={context.handleShowModal}
+                           to={config.routes.upload}
+                        >
+                           Upload
+                        </Button> */}
                      </Tippy>
                      <Tippy delay={[0, 200]} content="Message" placement="bottom">
                         <button className={cx('action-btn')}>

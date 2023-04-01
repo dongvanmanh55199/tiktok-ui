@@ -8,7 +8,6 @@ const routes = {
    coin: '/coin',
    setting: '/setting',
    feedback: '/feedback',
-   // logout: '/logout',
 }
 
 export default routes

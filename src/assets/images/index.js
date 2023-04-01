@@ -1,6 +1,7 @@
 const img = {
    logo: require('~/assets/images/logo.svg').default,
    noImage: require('~/assets/images/no-img.jpg'),
+   upload: require('~/assets/images/upload.png'),
    apple: require('~/assets/images/apple.svg').default,
    google: require('~/assets/images/google.svg').default,
    instagram: require('~/assets/images/instagram.svg').default,
