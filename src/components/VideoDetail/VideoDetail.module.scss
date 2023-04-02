@@ -1,0 +1,129 @@
+.wrapper {
+   position: fixed;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 40;
+   background-color: var(--white);
+}
+.inner {
+   display: flex;
+   //    flex-direction: column;
+   justify-content: space-between;
+   width: 100%;
+   height: 100%;
+}
+.thumbnail {
+   z-index: 1;
+   position: absolute;
+   width: 60%;
+   height: 100%;
+   object-fit: cover;
+   filter: brightness(0.2);
+}
+.avatar {
+   width: 44px;
+   height: 44px;
+   object-fit: cover;
+   border-radius: 50%;
+}
+.video {
+   position: absolute;
+   z-index: 3;
+   width: 400px;
+   margin: auto;
+   inset: 1;
+   border-radius: 10px;
+}
+.video-wrapper {
+   //    max-width: 470px;
+   height: 100%;
+   //    width: 450px;
+   flex: 2;
+}
+.video-info {
+   flex: 1;
+   margin-right: 40px;
+}
+.video-thumbnail {
+   width: 100%;
+   height: 100%;
+}
+.video-inner {
+   //    width: 100%;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-left: -85px;
+}
+.video-info-wrapper {
+   margin-top: 40px;
+}
+.video-info-detail {
+   display: flex;
+   justify-content: space-between;
+}
+.video-info-detail-wrapper {
+   display: flex;
+}
+.video-info-caption {
+   color: #8a8b91;
+   margin-top: 10px;
+}
+.video-info-music {
+   font-size: 1.8rem;
+   margin-top: 10px;
+}
+.video-info-link {
+   margin-top: 10px;
+   display: flex;
+   flex-direction: column;
+}
+.video-info-link-icon {
+   width: 24px;
+   height: 24px;
+   font-size: 2.4rem;
+   + .video-info-link-icon {
+      margin-left: 10px;
+   }
+}
+.video-info-link-wrapper {
+   display: flex;
+   justify-content: space-between;
+}
+.nickname {
+   font-size: 1.8rem;
+   font-weight: 700;
+}
+.name {
+   font-size: 1.4rem;
+   font-weight: 300;
+}
+.info-wrapper {
+   margin-left: 5px;
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+   justify-content: center;
+}
+
+.icon-left {
+   display: flex;
+   align-items: center;
+}
+.icon-left-num {
+   margin-left: 6px;
+   margin-right: 6px;
+}
+.link {
+   position: relative;
+   margin-top: 10px;
+   background-color: #e4e4e6;
+   height: 40px;
+   border-radius: 9px;
+   padding: 10px;
+   &:hover {
+      cursor: text;
+   }
+}

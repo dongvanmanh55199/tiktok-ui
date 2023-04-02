@@ -24,15 +24,9 @@ import { UserCurrentContext } from '~/components/UserCurrentContext'
 const cx = classNames.bind(styles)
 
 function Sidebar({ shrink }) {
-   // const [stateUser, setStateUser] = useState(false)
    const context = useContext(ModalContext)
-   // const contextUser = useContext(UserCurrentContext)
-   // useEffect(() => {
-   //    setStateUser(!stateUser)
-   //    console.log('render: ', stateUser)
-   // }, [contextUser.currentUser])
+   const contextUser = useContext(UserCurrentContext)
 
-   // console.log(contextUser.currentUser)
    const currentYear = new Date().getFullYear()
 
    const [suggests, setSuggests] = useState([])
@@ -81,7 +75,7 @@ function Sidebar({ shrink }) {
                </NavLink>
             </div>
 
-            {/* {stateUser && (
+            {contextUser.userCurrent || (
                <div className={cx('login')}>
                   <div className={cx('detail')}>
                      <p>Log in to follow creators, like videos, and view comments.</p>
@@ -90,7 +84,7 @@ function Sidebar({ shrink }) {
                      </Button>
                   </div>
                </div>
-            )} */}
+            )}
 
             <div className={cx('suggested')}>
                <p className={cx('title')}>Suggested accounts</p>
@@ -109,7 +103,7 @@ function Sidebar({ shrink }) {
                )}
             </div>
 
-            {/* {stateUser || (
+            {/* {contextUser.userCurrent || (
                <div className={cx('following')}>
                   <p className={cx('title')}>Following accounts</p>
                   <SuggestedAccounts />

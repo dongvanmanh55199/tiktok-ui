@@ -3,6 +3,7 @@ import { useContext, useState } from 'react'
 import classNames from 'classnames/bind'
 import { Link } from 'react-router-dom'
 
+import MessageLog from '~/components/MessageLog'
 import { ModalContext } from '~/components/ModalProvider'
 import { UserCurrentContext } from '~/components/UserCurrentContext'
 import Button from '~/components/Button'
@@ -14,6 +15,7 @@ function Register() {
 
    const [inputEmail, setInputEmail] = useState('')
    const [inputPassword, setInputPassword] = useState('')
+   const [messageLog, setMessageLog] = useState(false)
 
    const handleSubmit = () => {
       // setDatas({
@@ -31,12 +33,12 @@ function Register() {
       register(
          `https://tiktok.fullstack.edu.vn/api/auth/register?type=email&email=${inputEmail}&password=${inputPassword}`,
       ).then((data) => {
-         if (data.status_code == 409) {
-            alert('Invalid email address or an account already exists. ')
+         if (data.status_code == 409 || data.status_code == 422) {
+            setMessageLog(!messageLog)
+            // alert('Invalid email address or an account already exists. ')
          }
          if (data.data) {
-            alert('Account Created Successfully.')
-
+            // alert('Account Created Successfully.')
             context.handleHideModal()
          }
          // if (data.status_code == 401) {
@@ -70,6 +72,11 @@ function Register() {
                onChange={(e) => setInputPassword(e.target.value)}
             />
          </div>
+         {messageLog && (
+            <MessageLog
+               infoMessage={'Invalid email address or an account already exists. .'}
+            />
+         )}
          <Button onClick={handleSubmit} to="/" className={cx('btn-custom')} primary>
             Register
          </Button>

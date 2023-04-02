@@ -1,0 +1,34 @@
+.wrapper {
+   position: fixed;
+   display: flex;
+   inset: 0px;
+   top: 20px;
+   width: 800px;
+   height: 30px;
+   margin: 6px auto;
+   color: var(--white);
+   background-color: var(--primary);
+   z-index: 30;
+   justify-content: center;
+   align-items: center;
+   font-size: 2rem;
+   font-weight: 600;
+   padding: 20px 0;
+   border-radius: 9px;
+   animation: show linear 1s, hide linear 1s 2s forwards;
+}
+@keyframes show {
+   from {
+      transform: translateY(-100%);
+      opacity: 0;
+   }
+   to {
+      transform: translateY(0);
+      opacity: 1;
+   }
+}
+@keyframes hide {
+   to {
+      opacity: 0;
+   }
+}

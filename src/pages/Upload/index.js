@@ -6,6 +6,7 @@ import styles from './Upload.module.scss'
 import VideoPreview from './VideoPreview'
 import { UserCurrentContext } from '~/components/UserCurrentContext'
 import { ModalContext } from '~/components/ModalProvider'
+import MessageLog from '~/components/MessageLog'
 
 const cx = classNames.bind(styles)
 const checkboxData = [
@@ -30,6 +31,8 @@ function Upload() {
    const [allowInput, setAllowInput] = useState([])
    const [music, setMusic] = useState()
    const [thumbnail, setThumbnail] = useState()
+   const [messageLog, setMessageLog] = useState(false)
+   const [messageSuccessLog, setMessageSuccessLog] = useState(false)
 
    const inputRef = useRef()
 
@@ -86,10 +89,10 @@ function Upload() {
          return response.json()
       }
       login(`https://tiktok.fullstack.edu.vn/api/videos`).then((data) => {
-         if (data.data.id) {
-            alert('Upload thanh cong')
+         if (data.status_code === 422) {
+            setMessageSuccessLog(!messageSuccessLog)
          } else {
-            alert('Upload khong thanh cong')
+            setMessageLog(!messageLog)
          }
       })
    }
@@ -226,6 +229,12 @@ function Upload() {
                      posting.Learn more
                   </span>
                </div>
+               {messageLog && <MessageLog infoMessage={'Upload successful'} />}
+               {messageSuccessLog && (
+                  <MessageLog
+                     infoMessage={'Upload failed, err: "The given data was invalid."'}
+                  />
+               )}
                <div className={cx('btn-wrap')}>
                   <Button outline>Discard</Button>
 

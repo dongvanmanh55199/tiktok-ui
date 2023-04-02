@@ -1,7 +1,8 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
 import { Link } from 'react-router-dom'
 
+import MessageLog from '~/components/MessageLog'
 import Button from '~/components/Button'
 import styles from './Login.module.scss'
 import { ModalContext } from '~/components/ModalProvider'
@@ -10,9 +11,11 @@ const cx = classNames.bind(styles)
 function Login() {
    const context = useContext(ModalContext)
    const userContext = useContext(UserCurrentContext)
-   // const [datas, setDatas] = useState({})
+   const [messageLog, setMessageLog] = useState(false)
+   // const [messageSuccessLog, setMessageSuccessLog] = useState(false)
    const [inputEmail, setInputEmail] = useState('')
    const [inputPassword, setInputPassword] = useState('')
+
    // https://tiktok.fullstack.edu.vn/api
    // /auth/login?dongvanmanh2801@gmail.com=fmndajhgjng1
    // useEffect(() => {
@@ -49,18 +52,29 @@ function Login() {
       login(
          `https://tiktok.fullstack.edu.vn/api/auth/login?email=${inputEmail}&password=${inputPassword}`,
       ).then((data) => {
-         if (data.status_code == 401) {
-            alert('Login fails because the email or password is incorrect.')
+         if (data.status_code === 401) {
+            setMessageLog(!messageLog)
+
+            // alert('Login fails because the email or password is incorrect.')
+
+            // context.handleHideModal()
          } else {
+            // setMessageSuccessLog(!messageSuccessLog)
             // userContext.userCurrent = !userContext.userCurrent
             userContext.userCurrent = true
             // userContext.setUser()
             // userContext.setUC()
             userContext.dataUser = data
+
             context.handleHideModal()
          }
       })
    }
+   // useEffect(() => {
+   //    if (messageSuccessLog) {
+   //       context.handleHideModal()
+   //    }
+   // }, [messageSuccessLog])
    // useEffect(() => {
    //    async function login(url = '') {
    //       const response = await fetch(url, {
@@ -101,6 +115,12 @@ function Login() {
             />
          </div>
          <Link className={cx('forgotpass')}>Forgot password?</Link>
+         {messageLog && (
+            <MessageLog
+               infoMessage={'Login fails because the email or password is incorrect.'}
+            />
+         )}
+         {/* {messageSuccessLog && <MessageLog infoMessage={'Successful login..'} />} */}
 
          <Button onClick={handleSubmit} to="/" primary className={cx('btn-custom')}>
             Login

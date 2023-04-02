@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from './AccountItem.module.scss'
 import Image from '~/components/Image'
+
+import config from '~/config'
 const cx = classNames.bind(styles)
 function AccountItem({ data }) {
+   const home = config.routes.home
    return (
-      <Link to={`/@${data.nickname}`} className={cx('wrapper')}>
+      <Link to={`${home}@${data.nickname}`} className={cx('wrapper')}>
          <Image className={cx('avatar')} src={data.avatar} alt={data.full_name} />
          <div className={cx('info')}>
             <h4 className={cx('name')}>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import classNames from 'classnames/bind'
+import { useLocation } from 'react-router-dom'
 
 import * as videoService from '~/services/videoService'
 import Video from './Video'
@@ -13,6 +14,7 @@ function Home() {
    const [volume, setVolume] = useState(0.4)
    const [prevVolume, setPrevVolume] = useState(volume)
    const [mute, setMute] = useState(true)
+   const location = useLocation().pathname
 
    useEffect(() => {
       const fetchAPI = async () => {
@@ -53,6 +55,7 @@ function Home() {
       <div className={cx('wrapper')}>
          {videos.map((video, index) => (
             <Video
+               location={location}
                key={index}
                data={video}
                volume={volume}

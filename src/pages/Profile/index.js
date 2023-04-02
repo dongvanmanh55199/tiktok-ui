@@ -18,6 +18,8 @@ import ShareAction from '~/components/ShareAction'
 import VideoPreview from './VideoPreview'
 import { Wrapper as PopperWrapper } from '~/components/Popper'
 import { ModalContext } from '~/components/ModalProvider'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 const cx = classNames.bind(styles)
 
@@ -28,6 +30,7 @@ function Profile() {
    const context = useContext(ModalContext)
    const [info, setInfo] = useState()
 
+   console.log(data)
    useEffect(() => {
       fetch(`https://tiktok.fullstack.edu.vn/api/users${data}`)
          .then((response) => response.json())
@@ -36,7 +39,6 @@ function Profile() {
             setVideos(json.data.videos)
          })
    }, [data])
-
    return (
       <div className={cx('wrapper')}>
          <div className={cx('info-container')}>
@@ -49,7 +51,15 @@ function Profile() {
                         alt={data.avatar}
                      />
                      <div className={cx('text')}>
-                        <div className={cx('username')}>{info.data.nickname}</div>
+                        <div className={cx('username')}>
+                           {info.data.nickname}
+                           {info.data.tick && (
+                              <FontAwesomeIcon
+                                 className={cx('check')}
+                                 icon={faCheckCircle}
+                              />
+                           )}
+                        </div>
                         <div className={cx('name')}>
                            {info.data.full_name ||
                               `${info.data.first_name} ${info.data.last_name}`}

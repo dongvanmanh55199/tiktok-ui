@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals'
 import GlobalStyles from './components/GlobalStyles'
 import { ModalProvider } from './components/ModalProvider'
 import { UserCurrent } from './components/UserCurrentContext'
+import { PathContext } from './components/PathContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -13,7 +14,9 @@ root.render(
    <GlobalStyles>
       <ModalProvider>
          <UserCurrent>
-            <App />
+            <PathContext>
+               <App />
+            </PathContext>
          </UserCurrent>
       </ModalProvider>
    </GlobalStyles>,

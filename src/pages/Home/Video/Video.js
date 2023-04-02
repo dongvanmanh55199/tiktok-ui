@@ -4,6 +4,7 @@ import classNames from 'classnames/bind'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import HeadlessTippy from '@tippyjs/react/headless'
+import { Context } from '~/components/PathContext'
 
 import styles from './Video.module.scss'
 import {
@@ -25,11 +26,15 @@ import ShareAction from '~/components/ShareAction'
 
 const cx = classNames.bind(styles)
 
-function Video({ data, mute, volume, adjustVolume, toggleMuted }) {
+function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
    const [isPlaying, setIsPlaying] = useState(false)
 
    const videoRef = useRef()
    const context = useContext(ModalContext)
+   const contextPath = useContext(Context)
+   contextPath.path = location
+   // console.log(contextPath)
+   // console.log(data)
 
    useEffect(() => {
       if (mute) {
@@ -78,7 +83,6 @@ function Video({ data, mute, volume, adjustVolume, toggleMuted }) {
       window.addEventListener('scroll', playVideoInViewport)
       return () => window.removeEventListener('scroll', playVideoInViewport)
    })
-
    return (
       <div className={cx('wrapper')}>
          <Link to={`/@${data?.user.nickname}`} state={data?.user}>
@@ -185,17 +189,24 @@ function Video({ data, mute, volume, adjustVolume, toggleMuted }) {
 
             <div className={cx('video-wrapper')}>
                <div className={cx('video-card')}>
-                  <video
-                     style={
-                        data?.meta.video.resolution_x < data?.meta.video.resolution_y
-                           ? { width: '273px' }
-                           : { width: '463px' }
-                     }
-                     loop
-                     src={data?.file_url}
-                     ref={videoRef}
-                  ></video>
-
+                  <Button
+                     className={cx('video-card-btn')}
+                     onClick={() => {
+                        contextPath.ui = data?.user_id
+                     }}
+                     to={`/@${data?.user?.nickname}/videos/${data?.uuid}`}
+                  >
+                     <video
+                        style={
+                           data?.meta.video.resolution_x < data?.meta.video.resolution_y
+                              ? { width: '273px' }
+                              : { width: '463px' }
+                        }
+                        loop
+                        src={data?.file_url}
+                        ref={videoRef}
+                     ></video>
+                  </Button>
                   <div className={cx('control-play')} onClick={togglePlayVideo}>
                      {isPlaying ? <PauseIcon /> : <PlaySolidIcon />}
                   </div>
