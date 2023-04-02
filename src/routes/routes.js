@@ -15,6 +15,7 @@ import Search from '~/pages/Search'
 import Setting from '~/pages/Setting'
 import Feedback from '~/pages/Feedback'
 import Coin from '~/pages/Coin'
+import Logout from '~/pages/Logout'
 
 //Public routes
 const publicRoutes = [
@@ -55,6 +56,16 @@ const publicRoutes = [
    {
       path: config.routes.setting,
       component: Setting,
+   },
+   // {
+   //    path: config.routes.login,
+   //    component: Loading,
+   //    layout: StretchLayout,
+   // },
+   {
+      path: config.routes.logout,
+      component: Logout,
+      layout: StretchLayout,
    },
 ]
 const privateRoutes = []

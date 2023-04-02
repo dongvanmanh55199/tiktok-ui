@@ -8,45 +8,90 @@ import { UserCurrentContext } from '~/components/UserCurrentContext'
 import { ModalContext } from '~/components/ModalProvider'
 
 const cx = classNames.bind(styles)
+const checkboxData = [
+   {
+      type: 'comment',
+      title: 'Comment',
+   },
+   {
+      type: 'duet',
+      title: 'Duet',
+   },
+   {
+      type: 'stitch',
+      title: 'Stitch',
+   },
+]
 
 function Upload() {
    const [infoVideo, setInfoVideo] = useState()
    const [captionInput, setCaptionInput] = useState()
-   const [viewAble, setViewAble] = useState()
-   const [allowInput, setAllowInput] = useState()
+   const [viewAble, setViewAble] = useState('public')
+   const [allowInput, setAllowInput] = useState([])
    const [music, setMusic] = useState()
+   const [thumbnail, setThumbnail] = useState()
 
    const inputRef = useRef()
 
    const contextUser = useContext(UserCurrentContext)
    const contextModal = useContext(ModalContext)
 
-   // console.log(infoVideo, infoVideo.name)
-
+   // console.log(contextUser?.dataUser?.meta?.token)
+   const handleCheck = (id) => {
+      setAllowInput((prev) => {
+         const isChecked = allowInput.includes(id)
+         return isChecked ? allowInput.filter((item) => item !== id) : [...prev, id]
+      })
+   }
    const handleGetDataForm = () => {
-      const data = {
+      return {
          upload_file: infoVideo,
          description: captionInput,
          viewable: viewAble,
-         allow: allowInput,
+         allows: allowInput,
+         thumbnail,
          music,
       }
-      return data
    }
 
    const handleSubmit = () => {
-      handleGetDataForm()
-      // async function login(url = '') {
-      //    const response = await fetch(url, {
-      //       method: 'POST',
-      //    })
-      //    return response.json()
-      // }
-      // login(
-      //    `https://tiktok.fullstack.edu.vn/api/videos?upload_file=${inputEmail}&description=${inputPassword}&viewable=&allows[]=&music&thumbnail_time=`,
-      // ).then((data) => {
-      //    console.log(data)
-      // })
+      const data = { ...handleGetDataForm() }
+      const form = new FormData()
+      // console.log(data)
+      form.append('upload_file', data.upload_file)
+      form.append('description', data.description)
+      form.append('viewable', data.viewable)
+      if (data?.allows[0]) {
+         form.append('allows[]', data?.allows[0])
+      }
+      if (data?.allows[1]) {
+         form.append('allows[]', data?.allows[1])
+      }
+      if (data?.allows[2]) {
+         form.append('allows[]', data?.allows[2])
+      }
+      form.append('music', data.music)
+      form.append('thumbnail_time', data.thumbnail)
+      async function login(url = '') {
+         const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+               Accept: 'application/json',
+               // 'Content-Type': 'multipart/form-data',
+               Authorization: 'Bearer ' + contextUser?.dataUser?.meta?.token,
+               // Authorization: 'basic ' + props.getToken(),
+            },
+            body: form,
+         })
+         return response.json()
+      }
+      login(`https://tiktok.fullstack.edu.vn/api/videos`).then((data) => {
+         if (data.data.id) {
+            alert('Upload thanh cong')
+         } else {
+            alert('Upload khong thanh cong')
+         }
+      })
    }
 
    return (
@@ -109,20 +154,31 @@ function Upload() {
                      type="text"
                   />
                </div>
-               <div className={cx('cover-wrap')}>
-                  <span className={cx('title')}>Cover</span>
-                  <input type="text" className={cx('cover-input')} />
+
+               <div className={cx('thumbnail-wrap')}>
+                  <span className={cx('title')}>Thumbnail time(s)</span>
+                  <input
+                     type="number"
+                     value={thumbnail}
+                     className={cx('thumbnail-input')}
+                     onChange={(e) => setThumbnail(e.target.value)}
+                  />
                </div>
                <div className={cx('privacy')}>
                   <span className={cx('title')}>Who can watch this video</span>
-                  <select className={cx('privacy-input')}>
-                     <option value="1" className={cx('privacy-input-value')}>
+                  <select
+                     onChange={(e) => {
+                        setViewAble(e.target.value)
+                     }}
+                     className={cx('privacy-input')}
+                  >
+                     <option value="public" className={cx('privacy-input-value')}>
                         Public
                      </option>
-                     <option value="2" className={cx('privacy-input-value')}>
+                     <option value="friend" className={cx('privacy-input-value')}>
                         Friend
                      </option>
-                     <option value="3" className={cx('privacy-input-value')}>
+                     <option value="private" className={cx('privacy-input-value')}>
                         Private
                      </option>
                   </select>
@@ -130,12 +186,25 @@ function Upload() {
                <div className={cx('switch-wrap')}>
                   <span className={cx('title')}>Allow user to:</span>
                   <div className={cx('switch-wrap-container')}>
-                     <input className={cx('switch-wrap-input')} type="checkbox" />
+                     {checkboxData.map((checkboxItem, i) => (
+                        <div className={cx('switch-wrap-inner')} key={i}>
+                           <input
+                              checked={allowInput.includes(checkboxItem.type)}
+                              onChange={() => handleCheck(checkboxItem.type)}
+                              className={cx('switch-wrap-input')}
+                              type="checkbox"
+                           />
+                           <span className={cx('switch-wrap-label')}>
+                              {checkboxItem.title}
+                           </span>
+                        </div>
+                     ))}
+                     {/* <input className={cx('switch-wrap-input')} type="checkbox" />
                      <span className={cx('switch-wrap-label')}>Comment</span>
                      <input className={cx('switch-wrap-input')} type="checkbox" />
                      <span className={cx('switch-wrap-label')}>Duet</span>
                      <input className={cx('switch-wrap-input')} type="checkbox" />
-                     <span className={cx('switch-wrap-label')}>Stitch</span>
+                     <span className={cx('switch-wrap-label')}>Stitch</span> */}
                   </div>
                </div>
                <div className={cx('music')}>
@@ -147,6 +216,7 @@ function Upload() {
                      type="text"
                   />
                </div>
+               <div className={cx('music')}></div>
                <div className={cx('copyright-wrap')}>
                   <span className={cx('title')}>Run a copyright check</span>
 

@@ -52,7 +52,10 @@ function Login() {
          if (data.status_code == 401) {
             alert('Login fails because the email or password is incorrect.')
          } else {
+            // userContext.userCurrent = !userContext.userCurrent
             userContext.userCurrent = true
+            // userContext.setUser()
+            // userContext.setUC()
             userContext.dataUser = data
             context.handleHideModal()
          }

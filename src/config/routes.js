@@ -8,6 +8,8 @@ const routes = {
    coin: '/coin',
    setting: '/setting',
    feedback: '/feedback',
+   // login: '/login',
+   logout: '/logout',
 }
 
 export default routes

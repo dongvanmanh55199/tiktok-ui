@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import classNames from 'classnames/bind'
 
 import styles from './VideoPreview.module.scss'
@@ -12,7 +12,14 @@ function VideoPreview({ data }) {
    return (
       <div className={cx('wrapper')}>
          <div className={cx('inner')}>
-            <video className={cx('video')} controls src={videoURL} />
+            <video
+               // onTimeUpdate={(e) => {
+               //    console.log(Math.floor(e.target.duration))
+               // }}
+               className={cx('video')}
+               controls
+               src={videoURL}
+            />
          </div>
          <div>
             <img className={cx('img-upload')} src={img.upload} />
@@ -21,4 +28,4 @@ function VideoPreview({ data }) {
    )
 }
 
-export default VideoPreview
+export default memo(VideoPreview)

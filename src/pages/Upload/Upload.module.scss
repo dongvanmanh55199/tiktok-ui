@@ -101,9 +101,11 @@
    margin-top: 6px;
    border: 1px solid #ccc;
    height: 40px;
+   font-size: 2rem;
 }
 .cover-wrap,
 .caption-wrap,
+.thumbnail-wrap,
 .music,
 .privacy,
 .switch-wrap,
@@ -111,6 +113,13 @@
    margin-top: 20px;
    display: flex;
    flex-direction: column;
+}
+.thumbnail-input {
+   padding: 0 20px;
+   margin-top: 6px;
+   border: 1px solid #ccc;
+   height: 40px;
+   font-size: 2rem;
 }
 .cover-input {
    padding: 0 20px;
@@ -145,6 +154,7 @@
    margin-top: 6px;
    border: 1px solid #ccc;
    height: 40px;
+   font-size: 2rem;
 }
 .title {
    font-size: 1.8rem;
@@ -159,4 +169,11 @@
 .switch-wrap-container {
    display: flex;
    align-items: center;
+}
+.switch-wrap-inner {
+   display: flex;
+   align-items: center;
+   + .switch-wrap-inner {
+      margin-left: 10px;
+   }
 }

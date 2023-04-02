@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import classNames from 'classnames/bind'
 import Tippy from '@tippyjs/react'
 import { Link } from 'react-router-dom'
@@ -244,27 +244,6 @@ const MENU_ITEMS = [
 function Header({ stretch }) {
    const context = useContext(ModalContext)
    const userContext = useContext(UserCurrentContext)
-   // // setCurrentUser(userContext.userCurrent)
-   // const [render, setRender] = useState()
-
-   // console.log(currentUser, userContext.userCurrent)
-   const handleMenuChange = (menuItem) => {
-      console.log(menuItem.title, menuItem.title == 'Log out')
-      if (menuItem.type === 'language') {
-         console.log(menuItem.title)
-      }
-      // switch (menuItem.type) {
-      //    case 'language':
-      //       break
-
-      //    default:
-      //       throw new Error('Invalid')
-      // }
-      if (menuItem.title === 'Log out') {
-         userContext.userCurrent = false
-         userContext.dataUser = {}
-      }
-   }
 
    const userMenu = [
       {
@@ -286,7 +265,7 @@ function Header({ stretch }) {
       {
          icon: <FontAwesomeIcon icon={faSignOut} />,
          title: 'Log out',
-         // to: '/logout',
+         to: '/logout',
          // onClick: function () {
          //    userContext.userCurrent = false
          //    userContext.dataUser = {}
@@ -294,6 +273,26 @@ function Header({ stretch }) {
          separate: true,
       },
    ]
+
+   // console.log(currentUser, userContext.userCurrent)
+   const handleMenuChange = (menuItem) => {
+      if (menuItem.type === 'language') {
+         console.log(menuItem.title)
+      }
+      // switch (menuItem.type) {
+      //    case 'language':
+      //       break
+
+      //    default:
+      //       throw new Error('Invalid')
+      // }
+
+      // Log out ko chuyen trang no fresh
+      // if (menuItem.title === 'Log out') {
+      //    userContext.userCurrent = false
+      //    userContext.dataUser = {}
+      // }
+   }
    return (
       <header className={cx('wrapper')}>
          <div className={cx('inner', { stretch: stretch })}>
@@ -333,6 +332,13 @@ function Header({ stretch }) {
                         </button>
                      </Tippy>
 
+                     <Menu items={userMenu} onChange={handleMenuChange}>
+                        <Image
+                           src={userContext.dataUser?.data?.avatar}
+                           alt="avt"
+                           className={cx('user-avatar')}
+                        />
+                     </Menu>
                      {/* <div className={cx('current-user')}></div> */}
                   </>
                ) : (
@@ -340,8 +346,8 @@ function Header({ stretch }) {
                      <Button
                         outline
                         leftIcon={<PlusIcon />}
-                        // onClick={context.handleShowModal}
-                        to={config.routes.upload}
+                        onClick={context.handleShowModal}
+                        // to={config.routes.upload}
                      >
                         Upload
                      </Button>
@@ -352,28 +358,27 @@ function Header({ stretch }) {
                      >
                         Log in
                      </Button>
+                     <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
+                        <button className={cx('more-btn')}>
+                           <MoreIcon />
+                        </button>
+                     </Menu>
                   </>
                )}
 
-               <Menu
-                  items={userContext.userCurrent ? userMenu : MENU_ITEMS}
-                  onChange={handleMenuChange}
-               >
+               {/* <Menu items={userMenu} onChange={handleMenuChange}>
                   {userContext.userCurrent ? (
                      <Image
                         src={userContext.dataUser?.data?.avatar}
-                        // src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/7311f55e7cbfa803afb1e964dbf185c4.webp?x-expires=1678719600&x-signature=OmflogK2c4%2B4ImS73mD6Bv6Cvlg%3D"
                         alt="avt"
                         className={cx('user-avatar')}
-                        // fallback="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
                      />
                   ) : (
-                     <button className={cx('more-btn')}>
-                        {/* <FontAwesomeIcon icon={faEllipsisVertical} /> */}
-                        <MoreIcon />
-                     </button>
-                  )}
-               </Menu>
+                  <button className={cx('more-btn')}>
+                     <MoreIcon />
+                  </button>
+                  )} 
+               </Menu> */}
             </div>
          </div>
       </header>

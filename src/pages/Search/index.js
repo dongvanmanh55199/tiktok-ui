@@ -14,6 +14,7 @@ function Search() {
    const [page, setPage] = useState(1)
 
    const location = useLocation()
+   console.log(location)
 
    useEffect(() => {
       const fetchAPI = async () => {
