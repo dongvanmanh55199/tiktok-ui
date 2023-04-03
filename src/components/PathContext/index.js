@@ -5,6 +5,7 @@ function PathContext({ children }) {
    const data = {
       path: '',
       ui: null,
+      data: null,
    }
    return <Context.Provider value={data}>{children}</Context.Provider>
 }

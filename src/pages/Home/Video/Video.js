@@ -34,7 +34,6 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
    const contextPath = useContext(Context)
    contextPath.path = location
    // console.log(contextPath)
-   // console.log(data)
 
    useEffect(() => {
       if (mute) {

@@ -20,6 +20,7 @@ import { Wrapper as PopperWrapper } from '~/components/Popper'
 import { ModalContext } from '~/components/ModalProvider'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { Context } from '~/components/PathContext'
 
 const cx = classNames.bind(styles)
 
@@ -29,8 +30,8 @@ function Profile() {
    const [videos, setVideos] = useState([])
    const context = useContext(ModalContext)
    const [info, setInfo] = useState()
-
-   console.log(data)
+   const contextPath = useContext(Context)
+   // console.log(data)
    useEffect(() => {
       fetch(`https://tiktok.fullstack.edu.vn/api/users${data}`)
          .then((response) => response.json())
@@ -39,6 +40,10 @@ function Profile() {
             setVideos(json.data.videos)
          })
    }, [data])
+   contextPath.path = data
+   contextPath.ui = videos[0]?.user_id
+   contextPath.data = videos
+   // console.log(contextPath)
    return (
       <div className={cx('wrapper')}>
          <div className={cx('info-container')}>

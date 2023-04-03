@@ -234,7 +234,7 @@ const MENU_ITEMS = [
    {
       icon: <HelpIcon />,
       title: 'Feedback and help',
-      to: '/feedback',
+      // to: '/feedback',
    },
    {
       icon: <ShortBoardIcon />,

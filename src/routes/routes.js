@@ -31,6 +31,7 @@ const publicRoutes = [
    {
       path: config.routes.profile,
       component: Profile,
+      layout: StretchLayout,
    },
    {
       path: config.routes.live,

@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import classNames from 'classnames/bind'
 import { useLocation } from 'react-router-dom'
 
 import * as videoService from '~/services/videoService'
+import { Context } from '~/components/PathContext'
 import Video from './Video'
 import styles from './Home.module.scss'
 
@@ -15,7 +16,11 @@ function Home() {
    const [prevVolume, setPrevVolume] = useState(volume)
    const [mute, setMute] = useState(true)
    const location = useLocation().pathname
+   const contextPath = useContext(Context)
 
+   // console.log(contextPath)
+   // console.log(videos)
+   contextPath.data = videos
    useEffect(() => {
       const fetchAPI = async () => {
          const result = await videoService.getVideos('for-you', page)
@@ -51,6 +56,7 @@ function Home() {
       }
    }
 
+   // console.log(contextPath)
    return (
       <div className={cx('wrapper')}>
          {videos.map((video, index) => (
