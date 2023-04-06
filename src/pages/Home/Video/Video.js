@@ -11,6 +11,7 @@ import {
    CommentIcon,
    FlagIcon,
    HeartIcon,
+   HeartActiveIcon,
    MusicIcon,
    MutedIcon,
    PauseIcon,
@@ -23,17 +24,25 @@ import Image from '~/components/Image'
 import { Wrapper as PopperWrapper } from '~/components/Popper'
 import { ModalContext } from '~/components/ModalProvider'
 import ShareAction from '~/components/ShareAction'
-
+import { UserCurrentContext } from '~/components/UserCurrentContext'
 const cx = classNames.bind(styles)
 
 function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
    const [isPlaying, setIsPlaying] = useState(false)
-
    const videoRef = useRef()
    const context = useContext(ModalContext)
    const contextPath = useContext(Context)
+   const contextUser = useContext(UserCurrentContext)
+   const [follow, setFollow] = useState(() =>
+      data.user.is_followed ? 'Unfollow' : 'Follow',
+   )
+   const [like, setLike] = useState(() =>
+      data.is_liked ? <HeartActiveIcon /> : <HeartIcon />,
+   )
+   const [followState, setFollowState] = useState(data.user.is_followed)
+   const [likeState, setLikeState] = useState(data.is_liked)
+
    contextPath.path = location
-   // console.log(contextPath)
 
    useEffect(() => {
       if (mute) {
@@ -81,10 +90,10 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
    useEffect(() => {
       window.addEventListener('scroll', playVideoInViewport)
       return () => window.removeEventListener('scroll', playVideoInViewport)
-   })
+   }, [])
    return (
       <div className={cx('wrapper')}>
-         <Link to={`/@${data?.user.nickname}`} state={data?.user}>
+         <Link to={`/@${data?.user.nickname}`}>
             <Image
                className={cx('avatar')}
                src={data?.user.avatar}
@@ -95,14 +104,14 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
          <div className={cx('content')}>
             <div className={cx('info-wrapper')}>
                <div className={cx('text-info')}>
-                  <Link to={`/@${data?.user.nickname}`} state={data?.user}>
+                  <Link to={`/@${data?.user.nickname}`}>
                      <div className={cx('author')}>
                         <div>
                            <HeadlessTippy
                               interactive
                               hideOnClick="false"
                               placement="bottom"
-                              delay={[600, 0]}
+                              delay={[400, 0]}
                               offset={[40, 30]}
                               zIndex="99"
                               render={(attrs) => (
@@ -115,12 +124,11 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                                              alt={data?.user.avatar}
                                           />
 
-                                          <Button
-                                             primary
-                                             onClick={context.handleShowModal}
-                                          >
-                                             Follow
-                                          </Button>
+                                          {followState ? (
+                                             <Button outline>{follow}</Button>
+                                          ) : (
+                                             <Button primary>{follow}</Button>
+                                          )}
                                        </div>
 
                                        <div className={cx('tippy-username')}>
@@ -177,13 +185,65 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                   </div>
                </div>
 
-               <Button
-                  outline
-                  style={{ height: '28px' }}
-                  onClick={context.handleShowModal}
-               >
-                  Follow
-               </Button>
+               {followState ? (
+                  <Button
+                     outline
+                     style={{ height: '28px' }}
+                     onClick={() => {
+                        if (contextUser.userCurrent) {
+                           fetch(
+                              `https://tiktok.fullstack.edu.vn/api/users/${data.user_id}/unfollow`,
+                              {
+                                 method: 'POST',
+                                 headers: {
+                                    Accept: 'application/json',
+                                    Authorization:
+                                       'Bearer ' + contextUser?.dataUser?.meta?.token,
+                                 },
+                              },
+                           )
+                              .then((res) => res.json())
+                              .then((data) => {
+                                 setFollowState(data.data.is_followed)
+                                 setFollow('Follow')
+                              })
+                        } else {
+                           context.handleShowModal()
+                        }
+                     }}
+                  >
+                     {follow}
+                  </Button>
+               ) : (
+                  <Button
+                     primary
+                     style={{ height: '28px' }}
+                     onClick={() => {
+                        if (contextUser.userCurrent) {
+                           fetch(
+                              `https://tiktok.fullstack.edu.vn/api/users/${data.user_id}/follow`,
+                              {
+                                 method: 'POST',
+                                 headers: {
+                                    Accept: 'application/json',
+                                    Authorization:
+                                       'Bearer ' + contextUser?.dataUser?.meta?.token,
+                                 },
+                              },
+                           )
+                              .then((res) => res.json())
+                              .then((data) => {
+                                 setFollowState(data.data.is_followed)
+                                 setFollow('UnFollow')
+                              })
+                        } else {
+                           context.handleShowModal()
+                        }
+                     }}
+                  >
+                     {follow}
+                  </Button>
+               )}
             </div>
 
             <div className={cx('video-wrapper')}>
@@ -235,21 +295,71 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
 
                <div className={cx('actions')}>
                   <div className={cx('action-btn')}>
-                     <Button
-                        className={cx('custom-btn')}
-                        rounded
-                        onClick={context.handleShowModal}
-                     >
-                        <HeartIcon />
-                     </Button>
+                     {likeState ? (
+                        <Button
+                           className={cx('custom-btn')}
+                           rounded
+                           onClick={() => {
+                              if (contextUser.userCurrent) {
+                                 fetch(
+                                    `https://tiktok.fullstack.edu.vn/api/videos/${data?.uuid}/unlike`,
+                                    {
+                                       method: 'POST',
+                                       headers: {
+                                          Accept: 'application/json',
+                                          Authorization:
+                                             'Bearer ' +
+                                             contextUser?.dataUser?.meta?.token,
+                                       },
+                                    },
+                                 )
+                                    .then((res) => res.json())
+                                    .then((data) => {
+                                       setLikeState(data.data.is_liked)
+                                       setLike(<HeartIcon />)
+                                    })
+                              } else {
+                                 context.handleShowModal()
+                              }
+                           }}
+                        >
+                           {like}
+                        </Button>
+                     ) : (
+                        <Button
+                           className={cx('custom-btn')}
+                           rounded
+                           onClick={() => {
+                              if (contextUser.userCurrent) {
+                                 fetch(
+                                    `https://tiktok.fullstack.edu.vn/api/videos/${data?.uuid}/like`,
+                                    {
+                                       method: 'POST',
+                                       headers: {
+                                          Accept: 'application/json',
+                                          Authorization:
+                                             'Bearer ' +
+                                             contextUser?.dataUser?.meta?.token,
+                                       },
+                                    },
+                                 )
+                                    .then((res) => res.json())
+                                    .then((data) => {
+                                       setLikeState(data.data.is_liked)
+                                       setLike(<HeartActiveIcon />)
+                                    })
+                              } else {
+                                 context.handleShowModal()
+                              }
+                           }}
+                        >
+                           {like}
+                        </Button>
+                     )}
                      <p className={cx('numbers')}>{data?.likes_count}</p>
                   </div>
                   <div className={cx('action-btn')}>
-                     <Button
-                        className={cx('custom-btn')}
-                        rounded
-                        onClick={context.handleShowModal}
-                     >
+                     <Button className={cx('custom-btn')} rounded>
                         <CommentIcon />
                      </Button>
                      <p className={cx('numbers')}>{data?.comments_count}</p>

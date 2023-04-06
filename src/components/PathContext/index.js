@@ -7,6 +7,7 @@ function PathContext({ children }) {
       ui: null,
       data: null,
    }
+
    return <Context.Provider value={data}>{children}</Context.Provider>
 }
 

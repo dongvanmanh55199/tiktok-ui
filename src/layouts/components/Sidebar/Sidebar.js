@@ -30,22 +30,61 @@ function Sidebar({ shrink }) {
    const currentYear = new Date().getFullYear()
 
    const [suggests, setSuggests] = useState([])
-   const [seeAll, setSeeAll] = useState(false)
+   // const [seeAll, setSeeAll] = useState(false)
+   const [follow, setFollow] = useState([])
 
+   // useEffect(() => {
+   //    const fetchAPI = async () => {
+   //       if (!seeAll) {
+   //          const result = await suggestedAccountService.getSuggested(1, 5)
+   //          setSuggests(result)
+   //       } else {
+   //          const result = await suggestedAccountService.getSuggested(1, 16)
+   //          setSuggests(result)
+   //       }
+   //    }
+
+   //    fetchAPI()
+   // }, [seeAll])
    useEffect(() => {
-      const fetchAPI = async () => {
-         if (!seeAll) {
+      if (contextUser.userCurrent) {
+         fetch(`https://tiktok.fullstack.edu.vn/api/users/suggested?page=1&per_page=5`, {
+            method: 'GET',
+            headers: {
+               Accept: 'application/json',
+               // 'Content-Type': 'multipart/form-data',
+               Authorization: 'Bearer ' + contextUser?.dataUser?.meta?.token,
+            },
+         })
+            .then((response) => response.json())
+            .then((json) => {
+               setSuggests(json.data)
+            })
+      } else {
+         const fetchAPI = async () => {
             const result = await suggestedAccountService.getSuggested(1, 5)
             setSuggests(result)
-         } else {
-            const result = await suggestedAccountService.getSuggested(1, 16)
-            setSuggests(result)
          }
+         fetchAPI()
       }
-
-      fetchAPI()
-   }, [seeAll])
-
+   }, [contextUser.userCurrent])
+   useEffect(() => {
+      if (contextUser.userCurrent) {
+         fetch(`https://tiktok.fullstack.edu.vn/api/me/followings?page=1`, {
+            method: 'GET',
+            headers: {
+               Accept: 'application/json',
+               // 'Content-Type': 'multipart/form-data',
+               Authorization: 'Bearer ' + contextUser?.dataUser?.meta?.token,
+            },
+         })
+            .then((response) => response.json())
+            .then((json) => {
+               setFollow(json.data)
+            })
+      }
+   }, [contextUser.userCurrent])
+   // console.log(suggests)
    return (
       <div className={cx('wrapper', { shrink: shrink })}>
          <div className={cx('inner')}>
@@ -92,7 +131,7 @@ function Sidebar({ shrink }) {
                   return <SuggestedAccounts key={suggest.id} data={suggest} />
                })}
 
-               {seeAll ? (
+               {/* {seeAll ? (
                   <div className={cx('see-all')} onClick={() => setSeeAll(false)}>
                      See less
                   </div>
@@ -100,20 +139,17 @@ function Sidebar({ shrink }) {
                   <div className={cx('see-all')} onClick={() => setSeeAll(true)}>
                      See all
                   </div>
-               )}
+               )} */}
             </div>
 
-            {/* {contextUser.userCurrent || (
+            {contextUser.userCurrent && (
                <div className={cx('following')}>
                   <p className={cx('title')}>Following accounts</p>
-                  <SuggestedAccounts />
-                  <SuggestedAccounts />
-                  <SuggestedAccounts />
-                  <SuggestedAccounts />
-
-                  <div className={cx('see-all')}>See more</div>
+                  {follow.map((follow) => (
+                     <SuggestedAccounts key={follow.id} data={follow} />
+                  ))}
                </div>
-            )} */}
+            )}
 
             <div className={cx('discover')}>
                <p className={cx('title')}>Discover</p>
@@ -249,7 +285,7 @@ function Sidebar({ shrink }) {
 
                <span className={cx('copyright')}>
                   <FontAwesomeIcon icon={faCopyright} />{' '}
-                  <p>{currentYear} TikTok - Made by Manh</p>
+                  <p>{currentYear} TikTok - Clone by Dong Van Manh</p>
                </span>
             </div>
          </div>

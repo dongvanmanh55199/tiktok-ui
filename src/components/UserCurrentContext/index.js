@@ -8,7 +8,6 @@ function UserCurrent({ children }) {
    const value = {
       userCurrent,
       dataUser: {},
-      // setUser: setUserCurrent(!userCurrent),
    }
 
    return (

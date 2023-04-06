@@ -6,6 +6,7 @@ import * as videoService from '~/services/videoService'
 import { Context } from '~/components/PathContext'
 import Video from './Video'
 import styles from './Home.module.scss'
+import { UserCurrentContext } from '~/components/UserCurrentContext'
 
 const cx = classNames.bind(styles)
 
@@ -21,13 +22,46 @@ function Home() {
    // console.log(contextPath)
    // console.log(videos)
    contextPath.data = videos
-   useEffect(() => {
-      const fetchAPI = async () => {
-         const result = await videoService.getVideos('for-you', page)
-         setVideos((prev) => [...prev, ...result])
-      }
 
-      fetchAPI()
+   //Old Code
+   // useEffect(() => {
+   //    const fetchAPI = async () => {
+   //       const result = await videoService.getVideos('for-you', page)
+   //       setVideos((prev) => [...prev, ...result])
+   //    }
+
+   //    fetchAPI()
+   // }, [page])
+
+   //New Code
+   const contextUser = useContext(UserCurrentContext)
+   useEffect(() => {
+      if (contextUser.userCurrent) {
+         async function getVideos(url = '') {
+            const response = await fetch(url, {
+               method: 'GET',
+               headers: {
+                  Accept: 'application/json',
+                  // 'Content-Type': 'multipart/form-data',
+                  Authorization: 'Bearer ' + contextUser?.dataUser?.meta?.token,
+               },
+            })
+            return response.json()
+         }
+         getVideos(
+            `https://tiktok.fullstack.edu.vn/api/videos?type=for-you&page=${page}`,
+         ).then((data) => {
+            const result = data.data
+            setVideos((prev) => [...prev, ...result])
+         })
+      } else {
+         const fetchAPI = async () => {
+            const result = await videoService.getVideos('for-you', page)
+            setVideos((prev) => [...prev, ...result])
+         }
+
+         fetchAPI()
+      }
    }, [page])
 
    useEffect(() => {

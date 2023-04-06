@@ -1,22 +1,27 @@
+import { useContext, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import HeadlessTippy from '@tippyjs/react/headless'
 import classNames from 'classnames/bind'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { useContext } from 'react'
 
 import styles from './SuggestedAccounts.module.scss'
 import Image from '~/components/Image'
 import { Wrapper as PopperWrapper } from '~/components/Popper'
 import Button from '../Button'
 import { ModalContext } from '~/components/ModalProvider'
-
+import { UserCurrentContext } from '../UserCurrentContext'
 const cx = classNames.bind(styles)
 
 function SuggestedAccounts({ sidebar, data, ...passProps }) {
    const context = useContext(ModalContext)
+   const contextUser = useContext(UserCurrentContext)
+   const [follow, setFollow] = useState(() => (data.is_followed ? 'Unfollow' : 'Follow'))
 
+   const [followState, setFollowState] = useState(data.is_followed)
+   // console.log(follow, data, data.id)
+   console.log(data)
    return (
       <div>
          <HeadlessTippy
@@ -37,9 +42,65 @@ function SuggestedAccounts({ sidebar, data, ...passProps }) {
                            alt={data?.avatar}
                         />
 
-                        <Button primary onClick={context.handleShowModal}>
-                           Follow
-                        </Button>
+                        {followState ? (
+                           <Button
+                              outline
+                              onClick={() => {
+                                 if (contextUser.userCurrent) {
+                                    fetch(
+                                       `https://tiktok.fullstack.edu.vn/api/users/${data.id}/unfollow`,
+                                       {
+                                          method: 'POST',
+                                          headers: {
+                                             Accept: 'application/json',
+                                             Authorization:
+                                                'Bearer ' +
+                                                contextUser?.dataUser?.meta?.token,
+                                          },
+                                       },
+                                    )
+                                       .then((res) => res.json())
+                                       .then((data) => {
+                                          setFollowState(data.data.is_followed)
+                                          setFollow('Follow')
+                                       })
+                                 } else {
+                                    context.handleShowModal()
+                                 }
+                              }}
+                           >
+                              {follow}
+                           </Button>
+                        ) : (
+                           <Button
+                              primary
+                              onClick={() => {
+                                 if (contextUser.userCurrent) {
+                                    fetch(
+                                       `https://tiktok.fullstack.edu.vn/api/users/${data.id}/follow`,
+                                       {
+                                          method: 'POST',
+                                          headers: {
+                                             Accept: 'application/json',
+                                             Authorization:
+                                                'Bearer ' +
+                                                contextUser?.dataUser?.meta?.token,
+                                          },
+                                       },
+                                    )
+                                       .then((res) => res.json())
+                                       .then((data) => {
+                                          setFollowState(data.data.is_followed)
+                                          setFollow('Unfollow')
+                                       })
+                                 } else {
+                                    context.handleShowModal()
+                                 }
+                              }}
+                           >
+                              {follow}
+                           </Button>
+                        )}
                      </div>
 
                      <div className={cx('tippy-username')}>
@@ -74,7 +135,6 @@ function SuggestedAccounts({ sidebar, data, ...passProps }) {
                to={`/@${data?.nickname}`}
                className={cx('wrapper', { sidebar })}
                {...passProps}
-               state={data}
             >
                <Image className={cx('avatar')} src={data?.avatar} alt={data?.avatar} />
 

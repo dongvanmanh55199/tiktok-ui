@@ -5,7 +5,6 @@ import HeadlessTippy from '@tippyjs/react/headless'
 
 import styles from './Profile.module.scss'
 import Image from '~/components/Image'
-import Button from '~/components/Button'
 import {
    BanIcon,
    EllipsisHorizontalIcon,
@@ -17,10 +16,11 @@ import {
 import ShareAction from '~/components/ShareAction'
 import VideoPreview from './VideoPreview'
 import { Wrapper as PopperWrapper } from '~/components/Popper'
-import { ModalContext } from '~/components/ModalProvider'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { Context } from '~/components/PathContext'
+import { UserCurrentContext } from '~/components/UserCurrentContext'
+import HandleLogicFollow from './HandleLogicFollow'
 
 const cx = classNames.bind(styles)
 
@@ -28,21 +28,39 @@ function Profile() {
    const location = useLocation()
    const data = location.pathname
    const [videos, setVideos] = useState([])
-   const context = useContext(ModalContext)
    const [info, setInfo] = useState()
    const contextPath = useContext(Context)
-   // console.log(data)
+
+   const contextUser = useContext(UserCurrentContext)
+
    useEffect(() => {
-      fetch(`https://tiktok.fullstack.edu.vn/api/users${data}`)
-         .then((response) => response.json())
-         .then((json) => {
-            setInfo(json)
-            setVideos(json.data.videos)
+      if (contextUser.userCurrent) {
+         fetch(`https://tiktok.fullstack.edu.vn/api/users${data}`, {
+            method: 'GET',
+            headers: {
+               Accept: 'application/json',
+               // 'Content-Type': 'multipart/form-data',
+               Authorization: 'Bearer ' + contextUser?.dataUser?.meta?.token,
+            },
          })
+            .then((response) => response.json())
+            .then((json) => {
+               setInfo(json)
+               setVideos(json.data.videos)
+            })
+      } else {
+         fetch(`https://tiktok.fullstack.edu.vn/api/users${data}`)
+            .then((response) => response.json())
+            .then((json) => {
+               setInfo(json)
+               setVideos(json.data.videos)
+            })
+      }
    }, [data])
    contextPath.path = data
    contextPath.ui = videos[0]?.user_id
    contextPath.data = videos
+
    // console.log(contextPath)
    return (
       <div className={cx('wrapper')}>
@@ -69,13 +87,7 @@ function Profile() {
                            {info.data.full_name ||
                               `${info.data.first_name} ${info.data.last_name}`}
                         </div>
-                        <Button
-                           primary
-                           style={{ minWidth: '208px' }}
-                           onClick={context.handleShowModal}
-                        >
-                           Follow
-                        </Button>
+                        <HandleLogicFollow data={info} />
                      </div>
                   </div>
 
