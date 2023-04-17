@@ -25,6 +25,7 @@ import {
 import img from '~/assets/images'
 import AccountPreview from '../AccountPreview'
 import { ModalContext } from '../ModalProvider'
+import ModalForm from '../ModalForm'
 const cx = classNames.bind(styles)
 function VideoDetail() {
    const contextUser = useContext(UserCurrentContext)
@@ -94,10 +95,21 @@ function VideoDetail() {
             }
             setComment(data)
          })
-   }, [])
-   console.log(location.split('/')[3])
+   }, [location.split('/')[3]])
+   // console.log(location.split('/')[3])
 
    const [indexArr, setIndexArr] = useState(index.current)
+   // console.log(context.data[indexArr].user_id)
+   // console.log(context.data[indexArr].user.is_followed)
+   const [follow, setFollow] = useState(
+      context?.data[indexArr].user.is_followed ? 'Unfollow' : 'Follow',
+   )
+   useEffect(() => {
+      setFollow(context?.data[indexArr].user.is_followed ? 'Unfollow' : 'Follow')
+   }, [context?.data[indexArr].user.is_followed])
+   const [followState, setFollowState] = useState(
+      context?.data[indexArr].user.is_followed,
+   )
    return (
       <div className={cx('wrapper')}>
          <div className={cx('inner')}>
@@ -108,6 +120,9 @@ function VideoDetail() {
                   </Button>
                   {indexArr === 0 || (
                      <Button
+                        to={`/@${context?.data[indexArr - 1].user.nickname}/videos/${
+                           context?.data[indexArr - 1].uuid
+                        }`}
                         onClick={() => setIndexArr((prev) => prev - 1)}
                         className={cx('video-btn-prev')}
                         rounded
@@ -117,10 +132,14 @@ function VideoDetail() {
                   )}
                   {indexArr === context?.data?.length - 1 || (
                      <Button
+                        to={`/@${context?.data[indexArr + 1].user.nickname}/videos/${
+                           context?.data[indexArr + 1].uuid
+                        }`}
                         onClick={() => {
                            setIndexArr((prev) => prev + 1)
-                           // console.log('@', context?.data[indexArr].user.nickname)
-                           // console.log('uuid', context?.data[indexArr].uuid)
+                           // let index = indexArr + 1
+                           // console.log('@', context?.data[index].user.nickname)
+                           // console.log('uuid', context?.data[index].uuid)
                         }}
                         className={cx('video-btn-next')}
                         rounded
@@ -164,9 +183,65 @@ function VideoDetail() {
                               </div>
                            </AccountPreview>
                         </Link>
-                        <Button primary onClick={contextModal.handleShowModal}>
-                           Follow
-                        </Button>
+                        {followState ? (
+                           <Button
+                              outline
+                              onClick={() => {
+                                 if (contextUser.userCurrent) {
+                                    fetch(
+                                       `https://tiktok.fullstack.edu.vn/api/users/${context?.data[indexArr].user_id}/unfollow`,
+                                       {
+                                          method: 'POST',
+                                          headers: {
+                                             Accept: 'application/json',
+                                             Authorization:
+                                                'Bearer ' +
+                                                contextUser?.dataUser?.meta?.token,
+                                          },
+                                       },
+                                    )
+                                       .then((res) => res.json())
+                                       .then((data) => {
+                                          setFollowState(data.data.is_followed)
+                                          setFollow('Follow')
+                                       })
+                                 } else {
+                                    contextModal.handleShowModal()
+                                 }
+                              }}
+                           >
+                              {follow}
+                           </Button>
+                        ) : (
+                           <Button
+                              primary
+                              onClick={() => {
+                                 if (contextUser.userCurrent) {
+                                    fetch(
+                                       `https://tiktok.fullstack.edu.vn/api/users/${context?.data[indexArr].user_id}/follow`,
+                                       {
+                                          method: 'POST',
+                                          headers: {
+                                             Accept: 'application/json',
+                                             Authorization:
+                                                'Bearer ' +
+                                                contextUser?.dataUser?.meta?.token,
+                                          },
+                                       },
+                                    )
+                                       .then((res) => res.json())
+                                       .then((data) => {
+                                          setFollowState(data.data.is_followed)
+                                          setFollow('Unfollow')
+                                       })
+                                 } else {
+                                    contextModal.handleShowModal()
+                                 }
+                              }}
+                           >
+                              {follow}
+                           </Button>
+                        )}
                      </div>
                      <div className={cx('video-info-caption')}>
                         {context?.data[indexArr]?.description}
@@ -335,6 +410,8 @@ function VideoDetail() {
                   </div>
                </div>
             </div>
+
+            {contextModal.active && <ModalForm onHide={contextModal.handleHideModal} />}
          </div>
       </div>
    )

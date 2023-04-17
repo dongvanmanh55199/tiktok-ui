@@ -22,7 +22,7 @@
 
    &::-webkit-scrollbar-thumb {
       border-radius: 5px;
-      background: rgba(0, 0, 0, 0.05);
+      background: var(--scrollbar-thumb-bg);
    }
 
    &.shrink {
@@ -39,7 +39,8 @@
    margin-bottom: 8px;
 
    .tab-item {
-      color: rgba(22, 24, 35, 1);
+      color: var(--black);
+
       display: flex;
       align-items: center;
       padding: 8px;
@@ -48,6 +49,7 @@
 
       &.active {
          color: var(--primary);
+         background-color: var(--hover-color);
 
          .icon {
             display: none;
@@ -63,7 +65,7 @@
       }
 
       &:hover {
-         background: rgba(22, 24, 35, 0.03);
+         background: var(--hover-color);
       }
    }
 }
@@ -78,7 +80,7 @@
    }
 
    p {
-      color: rgba(22, 24, 35, 0.5);
+      color: var(--suggested-label);
       font-weight: 400;
       margin-bottom: 20px;
    }
@@ -106,14 +108,14 @@
       right: 8px;
       top: 0;
       height: 1px;
-      background: rgba(22, 24, 35, 0.08);
+      background: var(--separator-color);
    }
 
    .title {
       font-size: 14px;
       line-height: 20px;
       padding: 0 8px;
-      color: rgba(22, 24, 35, 0.75);
+      color: var(--search-btn);
       margin-bottom: 8px;
    }
 
@@ -148,18 +150,18 @@
       height: 24px;
       margin-bottom: 12px;
       padding: 3px 10px;
-      border: 1px solid rgba(22, 24, 35, 0.2);
+      border: 1px solid var(--focus-border-color);
       border-radius: 12px;
-      background: rgb(255, 255, 255);
+      background: var(--white);
       margin-right: 8px;
-      color: rgba(22, 24, 35, 0.75);
+      color: var(--search-btn);
       font-weight: 400;
       font-size: 14px;
       line-height: 18px;
       overflow: hidden;
 
       &:hover {
-         background: rgba(22, 24, 35, 0.03);
+         background: var(--hover-color);
          cursor: pointer;
       }
 
@@ -199,7 +201,7 @@
 
    a,
    span {
-      color: rgba(22, 24, 35, 0.5);
+      color: var(--user-name);
       margin-right: 6px;
       margin-top: 5px;
    }

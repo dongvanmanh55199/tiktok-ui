@@ -19,7 +19,7 @@
       -moz-transform: scaleY(0.5);
       -ms-transform: scaleY(0.5);
       transform: scaleY(0.5);
-      background: rgba(22, 24, 35, 0.2);
+      background: var(--focus-border-color);
    }
 }
 
@@ -132,7 +132,7 @@
       -webkit-transition: opacity 0.3s;
       transition: opacity 0.3s;
       bottom: 26px;
-      color: white;
+      color: #fff;
       opacity: 0;
    }
 
@@ -216,6 +216,7 @@
 }
 
 .actions {
+   margin-bottom: 20px;
    display: flex;
    flex-direction: column;
    height: 237px;
@@ -227,7 +228,7 @@
    }
 
    .numbers {
-      color: rgba(22, 24, 35, 0.75);
+      color: var(--search-btn);
       font-size: 12px;
       line-height: 17px;
       text-align: center;
@@ -287,9 +288,11 @@
       line-height: 20px;
       padding-top: 16px;
       margin-top: 16px;
-      border-top: 1px solid rgba(22, 24, 35, 0.12);
+      border-top: 1px solid var(--focus-border-color);
    }
 }
 .custom-btn {
+   color: var(--black);
+   background-color: var(--bg-video-feature);
    line-height: 0;
 }

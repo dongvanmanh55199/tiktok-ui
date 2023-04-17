@@ -47,24 +47,25 @@
 
    &:hover {
       cursor: pointer;
-      border-color: rgba(22, 24, 35, 0.2);
+      border-color: var(--focus-border-color);
       // background-color: rgba(22, 24, 35, 0.03);
    }
 }
 .primary {
    background-color: var(--primary);
-   color: var(--white);
+   color: #fff;
    &:hover {
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)),
+      background: linear-gradient(0deg, var(--bg-btn-color), var(--bg-btn-color)),
          var(--primary);
       cursor: pointer;
    }
 }
 .outline {
-   color: var(--primary);
+   color: var(--primary-darktheme);
    border-color: currentColor;
-   background-color: rgba(0, 0, 0, 0.06);
+   background-color: var(--bg-btn-color);
    &:hover {
+      background-color: var(--focus-border-color);
       border-color: currentColor;
       cursor: pointer;
    }

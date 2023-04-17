@@ -122,7 +122,7 @@ function Login() {
          )}
          {/* {messageSuccessLog && <MessageLog infoMessage={'Successful login..'} />} */}
 
-         <Button onClick={handleSubmit} to="/" primary className={cx('btn-custom')}>
+         <Button onClick={handleSubmit} primary className={cx('btn-custom')}>
             Login
          </Button>
       </>

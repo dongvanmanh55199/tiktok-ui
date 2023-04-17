@@ -1,6 +1,7 @@
 .menu-list {
    width: 240px;
    .menu-item {
+      color: var(--black);
       margin-left: 0;
    }
 }
@@ -20,10 +21,10 @@
    padding: 11px 18px;
    text-align: left;
    &.separate {
-      border-top: 1px solid rgba(22, 24, 35, 0.12);
+      border-top: 1px solid var(--separator-color);
    }
    &:hover {
-      background-color: rgba(22, 24, 35, 0.03);
+      background-color: var(--hover-color);
    }
 }
 
@@ -35,6 +36,7 @@
    flex-shrink: 0;
 }
 .back-btn {
+   color: var(--black);
    width: 50px;
    height: 100%;
    background-color: transparent;

@@ -3,19 +3,7 @@ import classNames from 'classnames/bind'
 import Tippy from '@tippyjs/react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-   // faMagnifyingGlass,
-   faSignIn,
-   // faEarthAsia,
-   // faCircleQuestion,
-   // faKeyboard,
-   // faCloudUpload,
-   // faMessage,
-   faUser,
-   faCoins,
-   faGear,
-   faSignOut,
-} from '@fortawesome/free-solid-svg-icons'
+import { faSignIn, faSignOut } from '@fortawesome/free-solid-svg-icons'
 import 'tippy.js/dist/tippy.css'
 
 import styles from './Header.module.scss'
@@ -37,6 +25,11 @@ import {
    MessageIcon,
    InboxIcon,
    PlusIcon,
+   UserIcon,
+   CoinIcon,
+   GearIcon,
+   ThemeIcon,
+   LogoutIcon,
 } from '~/components/Icons'
 
 import config from '~/config'
@@ -240,6 +233,10 @@ const MENU_ITEMS = [
       icon: <ShortBoardIcon />,
       title: 'Keyboard shortcuts',
    },
+   {
+      icon: <ThemeIcon />,
+      title: 'Dark mode',
+   },
 ]
 function Header({ stretch }) {
    const context = useContext(ModalContext)
@@ -247,23 +244,23 @@ function Header({ stretch }) {
 
    const userMenu = [
       {
-         icon: <FontAwesomeIcon icon={faUser} />,
+         icon: <UserIcon />,
          title: 'View profile',
-         to: '/userPath',
+         // to: '/userPath',
       },
       {
-         icon: <FontAwesomeIcon icon={faCoins} />,
+         icon: <CoinIcon />,
          title: 'Get coin',
-         to: '/coin',
+         // to: '/coin',
       },
       {
-         icon: <FontAwesomeIcon icon={faGear} />,
+         icon: <GearIcon />,
          title: 'Settings',
-         to: '/setting',
+         // to: '/setting',
       },
       ...MENU_ITEMS,
       {
-         icon: <FontAwesomeIcon icon={faSignOut} />,
+         icon: <LogoutIcon />,
          title: 'Log out',
          to: '/logout',
          // onClick: function () {
@@ -292,12 +289,16 @@ function Header({ stretch }) {
       //    userContext.userCurrent = false
       //    userContext.dataUser = {}
       // }
+      if (menuItem.title === 'Dark mode') {
+         console.log('xu ly theme')
+      }
    }
    return (
       <header className={cx('wrapper')}>
          <div className={cx('inner', { stretch: stretch })}>
             <Link to={config.routes.home} className={cx('logo-link')}>
-               <img src={img.logo} alt="Logo" />
+               {/* <img src={img.logo} alt="Logo" /> */}
+               <img src={img.logo_darktheme} alt="Logo" />
             </Link>
 
             <Search />
@@ -315,7 +316,7 @@ function Header({ stretch }) {
                            leftIcon={<PlusIcon />}
                            // onClick={context.handleShowModal}
                            to={config.routes.upload}
-                        >
+                        >action-btn
                            Upload
                         </Button> */}
                      </Tippy>

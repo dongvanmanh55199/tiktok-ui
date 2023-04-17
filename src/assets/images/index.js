@@ -1,5 +1,6 @@
 const img = {
    logo: require('~/assets/images/logo.svg').default,
+   logo_darktheme: require('~/assets/images/logo_darktheme.svg').default,
    noImage: require('~/assets/images/no-img.jpg'),
    upload: require('~/assets/images/upload.png'),
    apple: require('~/assets/images/apple.svg').default,

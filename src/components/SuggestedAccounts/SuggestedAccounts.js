@@ -21,7 +21,7 @@ function SuggestedAccounts({ sidebar, data, ...passProps }) {
 
    const [followState, setFollowState] = useState(data.is_followed)
    // console.log(follow, data, data.id)
-   console.log(data)
+   // console.log(data)
    return (
       <div>
          <HeadlessTippy

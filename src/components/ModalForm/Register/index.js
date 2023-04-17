@@ -77,7 +77,7 @@ function Register() {
                infoMessage={'Invalid email address or an account already exists. .'}
             />
          )}
-         <Button onClick={handleSubmit} to="/" className={cx('btn-custom')} primary>
+         <Button onClick={handleSubmit} className={cx('btn-custom')} primary>
             Register
          </Button>
       </>

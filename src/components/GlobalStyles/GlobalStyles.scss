@@ -3,12 +3,46 @@
 
 :root {
    --primary: blue;
+
+   --primary-darktheme: blue;
    --black: #000;
    --white: #fff;
    --text-color: #161823;
+   --search-btn: rgba(22, 24, 35, 0.75);
+   --separator-color: rgba(22, 24, 35, 0.12);
+   --focus-border-color: rgba(22, 24, 35, 0.2);
+   --bg-search: rgba(22, 24, 35, 0.06);
+   --search-title-color: rgba(22, 24, 35, 0.5);
+   --search-icon-color: rgba(22, 24, 35, 0.34);
+   --hover-color: rgba(22, 24, 35, 0.03);
+   --popper-color: #fff;
+   --user-name: rgba(22, 24, 35, 0.5);
+   --bg-btn-color: rgba(0, 0, 0, 0.06);
+   --bg-color: #fff;
+   --scrollbar-thumb-bg: rgba(0, 0, 0, 0.05);
+   --suggested-label: rgba(22, 24, 35, 0.5);
+   --bg-video-feature: rgba(22, 24, 35, 0.06);
+
+   --primary-darktheme: #fff;
+   --black: #fff;
+   --white: #000;
+   --text-color: #fff;
+   --search-btn: #565858;
+   --separator-color: #ffffff1f;
+   --focus-border-color: #565858;
+   --bg-search: #ffffff1f;
+   --search-title-color: #fff;
+   --search-icon-color: #ffffff1f;
+   --hover-color: #ffffff0a;
+   --popper-color: #252525;
+   --user-name: #e3e5ed;
+   --bg-btn-color: #ffffff1f;
+   --bg-color: #121212;
+   --scrollbar-thumb-bg: hsla(0, 0%, 100%, 0.08);
+   --suggested-label: #ffffff80;
+   --bg-video-feature: #ffffff1f;
 
    --font-family: 'Montserrat', sans-serif;
-
    --default-layout-header-height: 60px;
    --default-layout-width: 1150px;
    --default-layout-horizontal-spacer: 24px;
@@ -29,6 +63,8 @@ body {
    text-rendering: optimizeSpeed;
    color: var(--text-color);
    overflow-y: overlay;
+   // background-color: var(--black);
+   // color: var(--white);
 }
 
 // Scrollbar CSS

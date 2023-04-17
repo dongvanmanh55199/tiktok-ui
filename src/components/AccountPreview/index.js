@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import HeadlessTippy from '@tippyjs/react/headless'
 import classNames from 'classnames/bind'
 
@@ -7,12 +7,20 @@ import styles from './AccountPreview.module.scss'
 import Image from '../Image/Image'
 import Button from '../Button/Button'
 import { ModalContext } from '../ModalProvider'
+import { UserCurrentContext } from '../UserCurrentContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 const cx = classNames.bind(styles)
 
 function AccountPreview({ data, children }) {
    const context = useContext(ModalContext)
+   const contextUser = useContext(UserCurrentContext)
+   const [follow, setFollow] = useState(data.user.is_followed ? 'Unfollow' : 'Follow')
+   useEffect(() => {
+      setFollow(data.user.is_followed ? 'Unfollow' : 'Follow')
+   }, [data.user.is_followed])
+   const [followState, setFollowState] = useState(data.user.is_followed)
+
    return (
       <HeadlessTippy
          interactive
@@ -31,9 +39,69 @@ function AccountPreview({ data, children }) {
                         alt={data?.user.avatar}
                      />
 
-                     <Button primary onClick={context.handleShowModal}>
+                     {followState ? (
+                        <Button
+                           outline
+                           onClick={() => {
+                              if (contextUser.userCurrent) {
+                                 fetch(
+                                    `https://tiktok.fullstack.edu.vn/api/users/${data.user_id}/unfollow`,
+                                    {
+                                       method: 'POST',
+                                       headers: {
+                                          Accept: 'application/json',
+                                          Authorization:
+                                             'Bearer ' +
+                                             contextUser?.dataUser?.meta?.token,
+                                       },
+                                    },
+                                 )
+                                    .then((res) => res.json())
+                                    .then((data) => {
+                                       setFollowState(data.data.is_followed)
+                                       setFollow('Follow')
+                                    })
+                              } else {
+                                 alert('Hay Login')
+                              }
+                           }}
+                        >
+                           {follow}
+                        </Button>
+                     ) : (
+                        <Button
+                           primary
+                           onClick={() => {
+                              if (contextUser.userCurrent) {
+                                 fetch(
+                                    `https://tiktok.fullstack.edu.vn/api/users/${data.user_id}/follow`,
+                                    {
+                                       method: 'POST',
+                                       headers: {
+                                          Accept: 'application/json',
+                                          Authorization:
+                                             'Bearer ' +
+                                             contextUser?.dataUser?.meta?.token,
+                                       },
+                                    },
+                                 )
+                                    .then((res) => res.json())
+                                    .then((data) => {
+                                       setFollowState(data.data.is_followed)
+                                       setFollow('Unfollow')
+                                    })
+                              } else {
+                                 context.handleShowModal()
+                              }
+                           }}
+                        >
+                           {follow}
+                        </Button>
+                     )}
+
+                     {/* <Button primary onClick={context.handleShowModal}>
                         Follow
-                     </Button>
+                     </Button> */}
                   </div>
 
                   <div className={cx('tippy-username')}>
