@@ -53,7 +53,7 @@
    display: flex;
    align-items: center;
    margin-top: 22px;
-   color: rgba(18, 18, 18, 0.75);
+   color: var(--info-count);
    justify-content: space-between;
    max-width: 345px;
 
@@ -67,8 +67,8 @@
 .bio {
    max-width: 345px;
    text-align: left;
-   color: rgba(22, 24, 35, 1);
-   font-weight: 400;
+   color: var(--black);
+   font-weight: 500;
    white-space: pre-line;
    margin-top: 10px;
 }
@@ -76,7 +76,7 @@
 .website {
    display: flex;
    align-items: center;
-   color: rgb(22, 24, 35);
+   color: var(--black);
    font-weight: 600;
    display: flex;
    height: 22px;
@@ -153,7 +153,10 @@
    height: 44px;
    cursor: pointer;
    text-align: center;
-   color: rgb(22, 24, 35);
+   color: var(--black);
+   &:hover {
+      background-color: var(--hover-color);
+   }
 }
 
 .liked-tab {
@@ -170,9 +173,10 @@
    height: 44px;
    cursor: pointer;
    text-align: center;
-   color: rgba(22, 24, 35, 0.5);
+   color: var(--black);
 
    &:hover {
+      background-color: var(--hover-color);
       .underline {
          transform: translateX(230px);
       }
@@ -184,13 +188,14 @@
    position: absolute;
    width: 50%;
    height: 2px;
-   background: rgb(22, 24, 35);
+   background: var(--primary);
    left: 0px;
    bottom: 0px;
    transition: transform 0.3s ease 0s;
 }
 
 .videos {
+   margin-top: 20px;
    display: grid;
    gap: 24px 16px;
    grid-template-columns: repeat(auto-fill, minmax(184px, 1fr));
@@ -215,13 +220,13 @@
       font-size: 2.4rem;
       line-height: 28px;
       font-weight: 700;
-      color: rgba(22, 24, 35, 1);
+      color: var(--black);
       margin-top: 24px;
    }
 
    .description {
       font-weight: 400;
-      color: rgba(22, 24, 35, 0.75);
+      color: var(--search-btn);
       margin-top: 8px;
    }
 }
@@ -233,7 +238,7 @@
 
 .action-report,
 .action-block {
-   color: rgb(22, 24, 35);
+   color: var(--black);
    font-weight: 600;
    display: block;
    padding: 0px 16px;
@@ -244,7 +249,7 @@
    box-shadow: unset;
 
    &:hover {
-      background-color: rgba(58, 65, 107, 0.03);
+      background-color: var(--hover-color);
    }
 
    p {
@@ -260,6 +265,6 @@
 
 .action-report {
    p {
-      border-bottom: 1px solid rgba(22, 24, 35, 0.12);
+      border-bottom: 1px solid var(--separator-color);
    }
 }

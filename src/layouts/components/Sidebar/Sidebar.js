@@ -86,7 +86,7 @@ function Sidebar({ shrink }) {
    }, [contextUser.userCurrent])
    // console.log(suggests)
    return (
-      <div className={cx('wrapper', { shrink: shrink })}>
+      <div className={cx('wrapper', 'sidebar-rse', { shrink: shrink })}>
          <div className={cx('inner')}>
             <div className={cx('tabs')}>
                <NavLink
@@ -94,7 +94,8 @@ function Sidebar({ shrink }) {
                   className={(nav) => cx('tab-item', { active: nav.isActive })}
                >
                   <HomeIcon className={cx('icon')} />{' '}
-                  <HomeActiveIcon className={cx('active-icon')} /> For You
+                  <HomeActiveIcon className={cx('active-icon')} />
+                  <span className="hide-on-mobile">For You</span>
                </NavLink>
 
                <NavLink
@@ -102,7 +103,8 @@ function Sidebar({ shrink }) {
                   className={(nav) => cx('tab-item', { active: nav.isActive })}
                >
                   <UserGroupIcon className={cx('icon')} />{' '}
-                  <UserGroupActiveIcon className={cx('active-icon')} /> Following
+                  <UserGroupActiveIcon className={cx('active-icon')} />
+                  <span className="hide-on-mobile">Following</span>
                </NavLink>
 
                <NavLink
@@ -110,12 +112,13 @@ function Sidebar({ shrink }) {
                   className={(nav) => cx('tab-item', { active: nav.isActive })}
                >
                   <LiveIcon className={cx('icon')} />{' '}
-                  <LiveActiveIcon className={cx('active-icon')} /> LIVE
+                  <LiveActiveIcon className={cx('active-icon')} />
+                  <span className="hide-on-mobile">Live</span>
                </NavLink>
             </div>
 
             {contextUser.userCurrent || (
-               <div className={cx('login')}>
+               <div className={cx('login', 'hide-on-mobile')}>
                   <div className={cx('detail')}>
                      <p>Log in to follow creators, like videos, and view comments.</p>
                      <Button outline onClick={context.handleShowModal}>
@@ -126,7 +129,7 @@ function Sidebar({ shrink }) {
             )}
 
             <div className={cx('suggested')}>
-               <p className={cx('title')}>Suggested accounts</p>
+               <p className={cx('title', 'hide-on-mobile')}>Suggested accounts</p>
                {suggests.map((suggest) => {
                   return <SuggestedAccounts key={suggest.id} data={suggest} />
                })}
@@ -144,14 +147,14 @@ function Sidebar({ shrink }) {
 
             {contextUser.userCurrent && (
                <div className={cx('following')}>
-                  <p className={cx('title')}>Following accounts</p>
+                  <p className={cx('title', 'hide-on-mobile')}>Following accounts</p>
                   {follow.map((follow) => (
                      <SuggestedAccounts key={follow.id} data={follow} />
                   ))}
                </div>
             )}
 
-            <div className={cx('discover')}>
+            <div className={cx('discover', 'hide-on-mobile')}>
                <p className={cx('title')}>Discover</p>
                <div className={cx('discover-list')}>
                   <div className={cx('hashtag')}>
@@ -204,7 +207,7 @@ function Sidebar({ shrink }) {
                </div>
             </div>
 
-            <div className={cx('footer')}>
+            <div className={cx('footer', 'hide-on-mobile')}>
                <div className={cx('links-1')}>
                   <a href="https://www.tiktok.com/about?lang=en" target="blank">
                      About

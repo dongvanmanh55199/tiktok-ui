@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useRef } from 'react'
 import classNames from 'classnames/bind'
 import Tippy from '@tippyjs/react'
 import { Link } from 'react-router-dom'
@@ -241,7 +241,7 @@ const MENU_ITEMS = [
 function Header({ stretch }) {
    const context = useContext(ModalContext)
    const userContext = useContext(UserCurrentContext)
-
+   const imgRef = useRef()
    const userMenu = [
       {
          icon: <UserIcon />,
@@ -289,16 +289,32 @@ function Header({ stretch }) {
       //    userContext.userCurrent = false
       //    userContext.dataUser = {}
       // }
+
+      // if (menuItem.title === 'Dark mode') {
+      //    const rootElement = document.querySelector('#root')
+      //    rootElement.classList.toggle('darktheme')
+      //    rootElement.getAttribute('class') === 'darktheme'
+      //       ? (imgRef.current.src = img.logo_darktheme)
+      //       : (imgRef.current.src = img.logo)
+      // }
       if (menuItem.title === 'Dark mode') {
-         console.log('xu ly theme')
+         const bodyElement = document.querySelector('body')
+         bodyElement.classList.toggle('darktheme')
+         bodyElement.getAttribute('class') === 'darktheme'
+            ? (imgRef.current.src = img.logo_darktheme)
+            : (imgRef.current.src = img.logo)
       }
    }
    return (
       <header className={cx('wrapper')}>
          <div className={cx('inner', { stretch: stretch })}>
             <Link to={config.routes.home} className={cx('logo-link')}>
-               {/* <img src={img.logo} alt="Logo" /> */}
-               <img src={img.logo_darktheme} alt="Logo" />
+               {document.querySelector('body').getAttribute('class') === 'darktheme' ? (
+                  <img ref={imgRef} src={img.logo_darktheme} alt="Logo" />
+               ) : (
+                  <img ref={imgRef} src={img.logo} alt="Logo" />
+               )}
+               {/* <img src={img.logo_darktheme} alt="Logo" /> */}
             </Link>
 
             <Search />
@@ -321,13 +337,13 @@ function Header({ stretch }) {
                         </Button> */}
                      </Tippy>
                      <Tippy delay={[0, 200]} content="Message" placement="bottom">
-                        <button className={cx('action-btn')}>
+                        <button className={cx('action-btn', 'hide-on-mobile')}>
                            <MessageIcon />
                            {/* <FontAwesomeIcon icon={faMessage} /> */}
                         </button>
                      </Tippy>
                      <Tippy delay={[0, 200]} content="Inbox" placement="bottom">
-                        <button className={cx('action-btn')}>
+                        <button className={cx('action-btn', 'hide-on-mobile')}>
                            <InboxIcon />
                            {/* <FontAwesomeIcon icon={faMessage} /> */}
                         </button>
@@ -353,6 +369,7 @@ function Header({ stretch }) {
                         Upload
                      </Button>
                      <Button
+                        className="hide-on-mobile"
                         onClick={context.handleShowModal}
                         primary
                         leftIcon={<FontAwesomeIcon icon={faSignIn} />}
@@ -360,7 +377,7 @@ function Header({ stretch }) {
                         Log in
                      </Button>
                      <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-                        <button className={cx('more-btn')}>
+                        <button className={cx('more-btn', 'ml-header-btn-more')}>
                            <MoreIcon />
                         </button>
                      </Menu>

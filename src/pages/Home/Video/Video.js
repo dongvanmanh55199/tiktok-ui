@@ -90,18 +90,18 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
    useEffect(() => {
       window.addEventListener('scroll', playVideoInViewport)
       return () => window.removeEventListener('scroll', playVideoInViewport)
-   }, [])
+   })
    return (
       <div className={cx('wrapper')}>
          <Link to={`/@${data?.user.nickname}`}>
             <Image
-               className={cx('avatar')}
+               className={cx('avatar', 'avatar-wh')}
                src={data?.user.avatar}
                alt={data?.user.avatar}
             />
          </Link>
 
-         <div className={cx('content')}>
+         <div className={cx('content', 'video-container')}>
             <div className={cx('info-wrapper')}>
                <div className={cx('text-info')}>
                   <Link to={`/@${data?.user.nickname}`}>
@@ -173,7 +173,7 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                            </HeadlessTippy>
                         </div>
                         <p
-                           className={cx('fullname')}
+                           className={cx('fullname', 'hide-on-mobile')}
                         >{`${data?.user.first_name} ${data?.user.last_name}`}</p>
                      </div>
                   </Link>
@@ -187,6 +187,7 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
 
                {followState ? (
                   <Button
+                     className="hide-on-mobile"
                      outline
                      style={{ height: '28px' }}
                      onClick={() => {
@@ -216,6 +217,7 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                   </Button>
                ) : (
                   <Button
+                     className="hide-on-mobile"
                      primary
                      style={{ height: '28px' }}
                      onClick={() => {
@@ -256,6 +258,7 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                      to={`/@${data?.user?.nickname}/videos/${data?.uuid}`}
                   >
                      <video
+                        className="video-width"
                         style={
                            data?.meta.video.resolution_x < data?.meta.video.resolution_y
                               ? { width: '273px' }

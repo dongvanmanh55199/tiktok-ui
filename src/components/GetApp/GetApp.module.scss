@@ -26,7 +26,7 @@
    background: none;
    outline: none;
    padding: 0;
-   color: rgba(22, 24, 35, 0.75);
+   color: var(--search-btn);
    font-weight: 700;
    font-size: 14px;
    line-height: 20px;
@@ -36,7 +36,7 @@
    padding: 0 8px;
    min-width: 90px;
    height: 32px;
-   box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+   box-shadow: 0 2px 8px var(--bg-btn-color);
    border-radius: 52px;
    cursor: pointer;
    line-height: 30px;
@@ -44,15 +44,15 @@
    white-space: nowrap;
    border-width: 1px;
    border-style: solid;
-   border-color: rgba(22, 24, 35, 0.12);
-   background-color: rgba(255, 255, 255, 1);
+   border-color: var(--separator-color);
+   background-color: #fff;
    transition: transform 0.3s cubic-bezier(0.4, 0.14, 0.3, 1);
    transform-origin: right bottom;
    transform: none;
 
    &:hover {
-      border-color: rgba(22, 24, 35, 0.2);
-      background-color: rgba(255, 255, 255, 1);
+      border-color: var(--focus-border-color);
+      background-color: #fff;
    }
 }
 
@@ -69,7 +69,7 @@
    height: 32px;
    border-radius: 52px;
    background: var(--primary);
-   box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+   box-shadow: 0 2px 8px var(--bg-btn-color);
 }
 
 //Tippy CSS
@@ -84,8 +84,10 @@
    margin-right: 48px;
    margin-left: 16px;
    font-weight: 600;
+   // color: var(--black);
 
    .item {
+      // color: var(--black);
       margin: 6px 0;
       display: flex;
       -webkit-flex-direction: row;
@@ -104,14 +106,14 @@
       }
 
       &:hover {
-         background: rgba(22, 24, 35, 0.03);
+         background: var(--hover-color);
       }
    }
 
    .splitter {
       width: calc(100% - 16px);
       height: 1px;
-      background: rgba(22, 24, 35, 0.12);
+      background: var(--separator-color);
       transform: scaleY(0.5);
       left: 8px;
    }

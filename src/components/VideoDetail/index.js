@@ -112,7 +112,7 @@ function VideoDetail() {
    )
    return (
       <div className={cx('wrapper')}>
-         <div className={cx('inner')}>
+         <div className={cx('inner', 'video-detail')}>
             <div className={cx('video-wrapper')}>
                <div className={cx('video-inner')}>
                   <Button to={context.path} className={cx('video-btn')} rounded>

@@ -1,9 +1,11 @@
 .wrapper {
    height: 600px;
    width: 100%;
-   background-color: #f1f1f1;
+   // background-color: #f1f1f1;
+   background-color: var(--input-bg);
    position: relative;
    border-radius: 6px;
+   margin-bottom: 100px;
 }
 .inner {
    height: 100%;
@@ -40,8 +42,9 @@
    width: 55px;
    font-size: 2rem;
    font-weight: 700;
-   color: var(--white);
-   background-color: #c5c6c8;
+   color: #fff;
+   background-color: var(--bg-live);
+   // background-color: var(--input-bg);
    padding: 4px;
    border-radius: 4px;
 }
@@ -50,7 +53,8 @@
    margin-top: 20px;
    height: 20px;
    width: 200px;
-   background-color: #e4e4e5;
+   // background-color: #e4e4e5;
+   background-color: var(--bg-live);
 
    border-radius: 999px;
    &::before {
@@ -65,10 +69,11 @@
       top: 0;
       border-radius: 999px;
       // background-color: rgba(22, 24, 35, 0.08);
+
       background-image: linear-gradient(
          90deg,
          rgba(22, 24, 35, 0),
-         rgba(22, 24, 35, 0.08) 50%,
+         var(--bg-btn-color) 50%,
          rgba(22, 24, 35, 0)
       );
       animation: liveLoad linear 1.5s infinite;
@@ -95,7 +100,8 @@
    width: 400px;
    border-radius: 999px;
 
-   background-color: #e4e4e5;
+   // background-color: #e4e4e5;
+   background-color: var(--bg-live);
 
    &::before {
       content: '';
@@ -108,10 +114,11 @@
       top: 0;
       border-radius: 999px;
       // background-color: rgba(22, 24, 35, 0.08);
+
       background-image: linear-gradient(
          90deg,
          rgba(22, 24, 35, 0),
-         rgba(22, 24, 35, 0.08) 50%,
+         var(--bg-btn-color) 50%,
          rgba(22, 24, 35, 0)
       );
       animation: liveLoad linear 3s infinite;

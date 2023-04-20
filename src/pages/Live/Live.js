@@ -12,10 +12,10 @@ function Live() {
             <div className={cx('view')}></div>
             <div className={cx('info')}>
                <p className={cx('live')}>LIVE</p>
-               <p className={cx('line-a')}></p>
-               <p className={cx('line-b')}></p>
+               <p className={cx('line-a', 'linea')}></p>
+               <p className={cx('line-b', 'lineb')}></p>
             </div>
-            <div className={cx('heart')}>
+            <div className={cx('heart', 'hide-on-mobile ')}>
                <img src={img.heart} />
             </div>
          </div>

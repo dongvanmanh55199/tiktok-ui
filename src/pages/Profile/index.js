@@ -117,7 +117,7 @@ function Profile() {
                   </a>
                </div>
             )}
-            <div className={cx('side-btns')}>
+            <div className={cx('side-btns', 'hide-on-mobile')}>
                <div className={cx('share-btn')}>
                   <ShareAction offset={[-100, 10]}>
                      <div>
@@ -158,8 +158,8 @@ function Profile() {
             </div>
          </div>
 
-         <div className={cx('video-container')}>
-            <div className={cx('tabs')}>
+         <div className={cx('video-container', 'width-video-profile')}>
+            <div className={cx('tabs', 'width-video-profile')}>
                <p className={cx('video-tab')}>Videos</p>
                <p className={cx('liked-tab')}>Liked</p>
                <div className={cx('underline')}></div>

@@ -409,7 +409,7 @@ export const ShareIcon = ({ className, width = '2.4rem', height = '2.4rem' }) =>
       width={width}
       height={height}
       viewBox="0 0 24 24"
-      fill="none"
+      fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
    >
       <path
@@ -782,11 +782,13 @@ export const PCIcon = ({ className, width = '2.1rem', height = '2.1rem' }) => (
       width={width}
       height={height}
       viewBox="0 0 21 19"
+      fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
    >
       <path
-         fill="#161823"
+         fillRule="evenodd"
+         clipRule="evenodd"
+         // fill="#161823"
          d="M12.601 17h2.52a.84.84 0 110 1.68h-9.24a.84.84 0 110-1.68h2.1v-2.1h-6.3A1.682 1.682 0 010 13.22V1.88C0 .952.754.199 1.68.199h17.642c.927 0 1.68.753 1.68 1.68V13.22c0 .927-.753 1.68-1.68 1.68h-6.72V17zm-.84 0v-2.1h-2.94V17h2.94zM1.681 1.88v11.34h17.641V1.88H1.68z"
       ></path>
    </svg>
@@ -965,14 +967,14 @@ export const BanIcon = ({ className, width = '1.6rem', height = '1.6rem' }) => (
       width={width}
       height={height}
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill="currentColor"
       viewBox="0 0 16 16"
    >
       <path
-         fill="black"
+         fill="currentColor"
          fillRule="evenodd"
          clipRule="evenodd"
-         stroke="black"
+         stroke="currentColor"
          strokeWidth="0.75"
          d="M4.48 3.994l7.526 7.527A5.333 5.333 0 004.48 3.994zm7.056 8l-7.53-7.53a5.333 5.333 0 007.529 7.529zM3.765 3.75a6 6 0 118.47 8.5 6 6 0 01-8.47-8.5z"
       ></path>

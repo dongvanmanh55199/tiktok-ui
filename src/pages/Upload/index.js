@@ -98,12 +98,12 @@ function Upload() {
    }
 
    return (
-      <div className={cx('wrapper')}>
+      <div className={cx('wrapper', 'upload-center', 'reset-mg ')}>
          {/* <video style={{ width: '300px' }} controls src={videoURL} /> */}
          <span className={cx('title')}>Upload video</span>
          <span className={cx('subtitle')}>Post a video to your account</span>
 
-         <div className={cx('content')}>
+         <div className={cx('content', 'flex-column')}>
             <div className={cx('uploader')}>
                <div className={cx('upload')}>
                   <input
@@ -173,7 +173,7 @@ function Upload() {
                      onChange={(e) => {
                         setViewAble(e.target.value)
                      }}
-                     className={cx('privacy-input')}
+                     className={cx('privacy-input', 'width-auto')}
                   >
                      <option value="public" className={cx('privacy-input-value')}>
                         Public
@@ -188,9 +188,12 @@ function Upload() {
                </div>
                <div className={cx('switch-wrap')}>
                   <span className={cx('title')}>Allow user to:</span>
-                  <div className={cx('switch-wrap-container')}>
+                  <div className={cx('switch-wrap-container', 'flex-wrap')}>
                      {checkboxData.map((checkboxItem, i) => (
-                        <div className={cx('switch-wrap-inner')} key={i}>
+                        <div
+                           className={cx('switch-wrap-inner', 'width-full', 'ml')}
+                           key={i}
+                        >
                            <input
                               checked={allowInput.includes(checkboxItem.type)}
                               onChange={() => handleCheck(checkboxItem.type)}
@@ -236,7 +239,9 @@ function Upload() {
                   />
                )}
                <div className={cx('btn-wrap')}>
-                  <Button outline>Discard</Button>
+                  <Button className="hide-on-mobile" outline>
+                     Discard
+                  </Button>
 
                   <Button
                      onClick={() => {

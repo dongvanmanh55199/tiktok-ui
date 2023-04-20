@@ -71,7 +71,7 @@ function Search() {
 
    return (
       //warnning tippy
-      <div>
+      <div className="hide-on-mobile">
          <HeadlessTippy
             interactive
             visible={showResult && searchResult.length > 0}
@@ -88,11 +88,11 @@ function Search() {
             )}
             onClickOutside={handleHideResult}
          >
-            <div className={cx('search')}>
+            <div className={cx('search', 'search-rse')}>
                <input
                   ref={inputRef}
                   value={searchValue}
-                  placeholder="Search accounts and video"
+                  placeholder="Search accounts & videos"
                   spellCheck={false}
                   onChange={handleChange}
                   onFocus={() => setShowResult(true)}

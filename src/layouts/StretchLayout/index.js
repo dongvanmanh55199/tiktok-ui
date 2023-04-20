@@ -19,7 +19,7 @@ function StretchLayout({ children }) {
          <Header stretch />
          <div className={cx('container')}>
             <Sidebar shrink />
-            <div className={cx('content')}>
+            <div className={cx('content', 'content-margin')}>
                {children}
                <GetApp />
             </div>

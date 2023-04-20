@@ -60,10 +60,10 @@ function ModalForm({ onHide }) {
                   icon: <img src={images.kakaotalk} alt="" />,
                   title: 'Continue with KakaoTalk',
                },
-               {
-                  icon: <img src={images.apple} alt="" />,
-                  title: 'Continue with Apple',
-               },
+               // {
+               //    icon: <img src={images.apple} alt="" />,
+               //    title: 'Continue with Apple',
+               // },
                {
                   icon: <img src={images.instagram} alt="" />,
                   title: 'Continue with Instagram',

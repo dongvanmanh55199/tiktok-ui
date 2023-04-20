@@ -4,7 +4,7 @@
    width: 100%;
    height: 100%;
    z-index: 40;
-   background-color: var(--white);
+   background-color: var(--bg-color);
 }
 .inner {
    position: relative;
@@ -17,7 +17,7 @@
 
 .video-btn {
    line-height: 0;
-   color: var(--white);
+   color: #fff;
    height: 40px;
    width: 40px;
    position: absolute;
@@ -116,7 +116,7 @@
    display: flex;
 }
 .video-info-caption {
-   color: #8a8b91;
+   color: var(--description-color);
    margin-top: 10px;
 }
 .video-info-music {
@@ -173,7 +173,8 @@
 .link {
    position: relative;
    margin-top: 10px;
-   background-color: #e4e4e6;
+   background-color: var(--input-bg);
+   color: var(--suggested-label);
    height: 40px;
    border-radius: 9px;
    padding: 10px;
@@ -182,10 +183,11 @@
    }
 }
 .icon-l-btn {
+   color: var(--black);
    width: 32px;
    height: 32px;
    line-height: 0;
-   background-color: #f1f1f2;
+   background-color: var(--bg-video-feature);
    ~ .icon-l-btn {
       margin-left: 20px;
    }
@@ -208,7 +210,7 @@
 //cmt
 .cmt {
    margin-top: 20px;
-   border-top: 1px solid #d0d1d3;
+   border-top: 1px solid var(--separator-color);
    overflow-y: scroll;
    max-height: 333px;
    display: flex;
@@ -246,7 +248,7 @@
 .cmt-time,
 .cmt-text {
    font-size: 1.4rem;
-   color: #8a8b91;
+   color: var(--description-color);
 }
 .cmt-r {
    display: flex;
@@ -254,13 +256,13 @@
    align-items: center;
    justify-content: space-between;
 
-   color: #8a8b91;
+   color: var(--description-color);
 }
 .cmt-number {
    font-size: 1.2rem;
 }
 .video-post {
-   border-top: 1px solid #d0d1d3;
+   border-top: 1px solid var(--separator-color);
    height: 90px;
 }
 .video-post-inner {
@@ -269,7 +271,9 @@
 }
 .cmt-input {
    font-size: 1.5rem;
-   background-color: #f1f1f2;
+   // background-color: #f1f1f2;
+   color: var(--user-name);
+   background-color: var(--input-bg);
    flex: 1;
    padding: 15px;
    border-radius: 10px;
@@ -278,7 +282,7 @@
    }
 }
 .cmt-btn {
-   color: #8a8b91;
+   color: var(--info-count);
 }
 .cmt-message {
    margin: 20px auto;

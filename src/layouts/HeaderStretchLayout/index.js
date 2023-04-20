@@ -18,7 +18,7 @@ function HeaderStretchLayout({ children }) {
       <div className={cx('wrapper')}>
          <Header stretch />
          <div className={cx('container')}>
-            <div className={cx('content')}>
+            <div className={cx('content', 'ml-tablet', 'ml')}>
                {children}
                <GetApp />
             </div>

@@ -4,11 +4,11 @@
    width: 220px;
    height: 300px;
    border-radius: 13px;
-   box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 12px;
+   box-shadow: var(--scrollbar-thumb-bg) 0px 2px 12px;
 }
 .video-item {
    position: relative;
-   color: var(--white);
+   color: #fff;
    cursor: pointer;
 }
 
@@ -49,5 +49,5 @@
    width: 226px;
    height: 310px;
    border-radius: 13px;
-   box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 12px;
+   box-shadow: var(--scrollbar-thumb-bg) 0px 2px 12px;
 }

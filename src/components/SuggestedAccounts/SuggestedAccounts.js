@@ -138,7 +138,7 @@ function SuggestedAccounts({ sidebar, data, ...passProps }) {
             >
                <Image className={cx('avatar')} src={data?.avatar} alt={data?.avatar} />
 
-               <div className={cx('info')}>
+               <div className={cx('info', 'hide-on-mobile')}>
                   <div className={cx('username')}>
                      <span>{data?.nickname}</span>
                      {data?.tick && (

@@ -17,6 +17,7 @@ function HandleLogicFollow({ data }) {
       <>
          {followState ? (
             <Button
+               className="btn-min-width"
                outline
                style={{ minWidth: '208px' }}
                onClick={() => {
@@ -46,6 +47,7 @@ function HandleLogicFollow({ data }) {
             </Button>
          ) : (
             <Button
+               className="btn-min-width"
                primary
                style={{ minWidth: '208px' }}
                onClick={() => {

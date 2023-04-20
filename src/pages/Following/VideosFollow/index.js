@@ -19,7 +19,7 @@ function VideosFollow({ data }) {
                   to={`/@${videoItem.nickname}`}
                   state={data?.user}
                   key={videoItem.id}
-                  className={cx('video-item')}
+                  className={cx('video-item', 'magin-auto')}
                >
                   <Image
                      src={videoItem.popular_video.thumb_url}
