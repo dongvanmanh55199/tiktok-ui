@@ -3,7 +3,7 @@ import styles from './MessageLog.module.scss'
 const cx = classNames.bind(styles)
 function MessageLog({ infoMessage }) {
    return (
-      <div className={cx('wrapper')}>
+      <div className={cx('wrapper', 'MessageLog')}>
          <div className={cx('inner')}>{infoMessage}</div>
       </div>
    )

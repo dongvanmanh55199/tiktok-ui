@@ -286,6 +286,10 @@
 }
 .cmt-message {
    margin: 20px auto;
-   font-size: 1.6rem;
-   font-weight: 700;
+   font-size: 1.4rem;
+   font-weight: 400;
+}
+.cmt-btn {
+   color: var(--primary);
+   min-width: 0;
 }

@@ -142,11 +142,11 @@ function ModalForm({ onHide }) {
    return (
       <div className={cx('modal-mask')}>
          <div className={cx('wrapper')}>
-            <div className={cx('container')}>
+            <div className={cx('container', 'width-full')}>
                <div className={cx('inner')}>
                   <div className={cx('title')}>{filteredForm.title}</div>
 
-                  <div className={cx('list')}>
+                  <div className={cx('list', 'width-modal-form')}>
                      {formLoginState === 'Login' && <Login />}
                      {formLoginState === 'Register' && <Register />}
                      {filteredForm.contents?.map((content, index) => {

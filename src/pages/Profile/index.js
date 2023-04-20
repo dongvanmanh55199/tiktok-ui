@@ -69,12 +69,12 @@ function Profile() {
                <div className={cx('info')}>
                   <div className={cx('basic')}>
                      <Image
-                        className={cx('avatar')}
+                        className={cx('avatar', 'avatar-wh-profile')}
                         src={info.data.avatar}
                         alt={data.avatar}
                      />
                      <div className={cx('text')}>
-                        <div className={cx('username')}>
+                        <div className={cx('username', 'nickname-font-size')}>
                            {info.data.nickname}
                            {info.data.tick && (
                               <FontAwesomeIcon
@@ -83,7 +83,7 @@ function Profile() {
                               />
                            )}
                         </div>
-                        <div className={cx('name')}>
+                        <div className={cx('name', 'fullname-font-size')}>
                            {info.data.full_name ||
                               `${info.data.first_name} ${info.data.last_name}`}
                         </div>
@@ -91,7 +91,7 @@ function Profile() {
                      </div>
                   </div>
 
-                  <div className={cx('counts')}>
+                  <div className={cx('counts', 'font-size')}>
                      <div className={cx('following')}>
                         <strong>{info.data.followings_count}</strong> Following
                      </div>

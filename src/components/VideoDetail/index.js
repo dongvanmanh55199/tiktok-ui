@@ -32,19 +32,20 @@ function VideoDetail() {
    const contextModal = useContext(ModalContext)
    const context = useContext(Context)
    const location = useLocation().pathname
-   const index = useRef(-1)
+   let index = -1
    // const [followState, setFollowState] = useState()
 
    if (context.path.includes('@')) {
       context?.data?.find((item) => {
-         index.current++
+         index++
          // return item.uuid === 'ab771700-ec3d-4561-90c0-380eaec9a88e'
          return item.uuid === location.split('/')[3]
       })
    } else {
       context?.data?.find((item) => {
-         index.current++
-         return item.user_id === context.ui
+         index++
+         return item.uuid === location.split('/')[3]
+         // return item.user_id === context.ui
       })
    }
 
@@ -77,28 +78,32 @@ function VideoDetail() {
 
    const [comment, setComment] = useState('')
    useEffect(() => {
-      fetch(
-         `https://tiktok.fullstack.edu.vn/api/videos/${location.split('/')[3]}/comments`,
-         {
-            headers: {
-               Accept: 'application/json',
-               // 'Content-Type': 'multipart/form-data',
-               Authorization: 'Bearer ' + contextUser?.dataUser?.meta?.token,
-               // Authorization: 'basic ' + props.getToken(),
+      if (contextUser.userCurrent) {
+         fetch(
+            `https://tiktok.fullstack.edu.vn/api/videos/${
+               location.split('/')[3]
+            }/comments`,
+            {
+               headers: {
+                  Accept: 'application/json',
+                  // 'Content-Type': 'multipart/form-data',
+                  Authorization: 'Bearer ' + contextUser?.dataUser?.meta?.token,
+                  // Authorization: 'basic ' + props.getToken(),
+               },
             },
-         },
-      )
-         .then((res) => res.json())
-         .then((data) => {
-            if (data.status_code == 401) {
-               console.log('chua login')
-            }
-            setComment(data)
-         })
+         )
+            .then((res) => res.json())
+            .then((data) => {
+               if (data.status_code == 401) {
+                  console.log('chua login')
+               }
+               setComment(data)
+            })
+      }
    }, [location.split('/')[3]])
    // console.log(location.split('/')[3])
 
-   const [indexArr, setIndexArr] = useState(index.current)
+   const [indexArr, setIndexArr] = useState(index)
    // console.log(context.data[indexArr].user_id)
    // console.log(context.data[indexArr].user.is_followed)
    const [follow, setFollow] = useState(
@@ -110,6 +115,8 @@ function VideoDetail() {
    const [followState, setFollowState] = useState(
       context?.data[indexArr].user.is_followed,
    )
+
+   console.log(context, indexArr, index)
    return (
       <div className={cx('wrapper')}>
          <div className={cx('inner', 'video-detail')}>
@@ -156,7 +163,7 @@ function VideoDetail() {
                      autoPlay
                      controls
                      src={context?.data[indexArr]?.file_url}
-                     className={cx('video')}
+                     className={cx('video', 'video-detail-video-width')}
                   />
                </div>
             </div>
@@ -389,10 +396,14 @@ function VideoDetail() {
                         ))
                      ) : (
                         <div className={cx('cmt-message')}>
-                           YOU NEED TO LOGIN TO USE COMMENTS.
-                           {/* <Button text onClick={contextModal.handleShowModal}>
+                           You need to login to use comments.
+                           <Button
+                              className={cx('cmt-btn')}
+                              text
+                              onClick={contextModal.handleShowModal}
+                           >
                               Login
-                           </Button> */}
+                           </Button>
                         </div>
                      )}
                   </div>

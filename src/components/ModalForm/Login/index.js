@@ -37,6 +37,12 @@ function Login() {
    // }, [])
 
    const handleSubmit = () => {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputEmail)) {
+      } else {
+         setMessageLog(!messageLog)
+         return
+      }
+
       // setDatas({
       //    email: inputEmail,
       //    password: inputPassword,
@@ -52,7 +58,7 @@ function Login() {
       login(
          `https://tiktok.fullstack.edu.vn/api/auth/login?email=${inputEmail}&password=${inputPassword}`,
       ).then((data) => {
-         if (data.status_code === 401) {
+         if (data.status_code === 401 && data.status_code === 422) {
             setMessageLog(!messageLog)
 
             // alert('Login fails because the email or password is incorrect.')
@@ -94,7 +100,7 @@ function Login() {
 
    return (
       <>
-         <div className={cx('email')}>
+         <div className={cx('email', 'form-login')}>
             <div className={cx('email-label')}>Email</div>
             <input
                value={inputEmail}
@@ -104,7 +110,7 @@ function Login() {
                onChange={(e) => setInputEmail(e.target.value)}
             />
          </div>
-         <div className={cx('password')}>
+         <div className={cx('password', 'form-login')}>
             <div className={cx('password-label')}>Password</div>
             <input
                value={inputPassword}
@@ -114,7 +120,7 @@ function Login() {
                onChange={(e) => setInputPassword(e.target.value)}
             />
          </div>
-         <Link className={cx('forgotpass')}>Forgot password?</Link>
+         <Link className={cx('forgotpass', 'form-login')}>Forgot password?</Link>
          {messageLog && (
             <MessageLog
                infoMessage={'Login fails because the email or password is incorrect.'}
@@ -122,7 +128,11 @@ function Login() {
          )}
          {/* {messageSuccessLog && <MessageLog infoMessage={'Successful login..'} />} */}
 
-         <Button onClick={handleSubmit} primary className={cx('btn-custom')}>
+         <Button
+            onClick={handleSubmit}
+            primary
+            className={cx('btn-custom', 'form-login')}
+         >
             Login
          </Button>
       </>

@@ -222,8 +222,20 @@ body {
       width: 160px;
    }
    .avatar-wh-profile {
-      height: 80px;
-      width: 80px;
+      height: 50px;
+      width: 50px;
+   }
+   .nickname-font-size {
+      font-size: 1.6rem;
+      // line-height: auto;
+   }
+   .fullname-font-size {
+      line-height: 0 !important;
+      font-size: 1.4rem;
+      margin-bottom: 0;
+   }
+   .font-size {
+      font-size: 1.4rem;
    }
    .btn-min-width {
       min-width: 130px !important;
@@ -251,5 +263,21 @@ body {
    }
    .flex-wrap {
       flex-wrap: wrap;
+   }
+   .video-detail-video-width {
+      width: 90%;
+      margin-bottom: 20px;
+   }
+   .width-modal-form {
+      width: 350px;
+   }
+   .form-login {
+      margin: 0 20px 20px;
+   }
+
+   .MessageLog {
+      width: 93%;
+      font-size: 1.2rem;
+      text-align: center;
    }
 }
