@@ -10,6 +10,7 @@ import {
    EllipsisHorizontalIcon,
    FlagIcon,
    LinkIcon,
+   EditIcon,
    ShareIcon,
    UserRegularIcon,
 } from '~/components/Icons'
@@ -21,6 +22,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { Context } from '~/components/PathContext'
 import { UserCurrentContext } from '~/components/UserCurrentContext'
 import HandleLogicFollow from './HandleLogicFollow'
+import Button from '~/components/Button/Button'
 
 const cx = classNames.bind(styles)
 
@@ -61,7 +63,12 @@ function Profile() {
    contextPath.ui = videos[0]?.user_id
    contextPath.data = videos
 
-   // console.log(contextPath)
+   const isUserCurrent = data.includes(contextUser?.dataUser?.data?.nickname)
+   const [isUser, setIsUser] = useState(!isUserCurrent)
+
+   useEffect(() => {
+      setIsUser(!isUser)
+   }, [isUserCurrent])
    return (
       <div className={cx('wrapper')}>
          <div className={cx('info-container')}>
@@ -87,7 +94,13 @@ function Profile() {
                            {info.data.full_name ||
                               `${info.data.first_name} ${info.data.last_name}`}
                         </div>
-                        <HandleLogicFollow data={info} />
+                        {isUser ? (
+                           <Button outline leftIcon={<EditIcon />}>
+                              Edit Profile
+                           </Button>
+                        ) : (
+                           <HandleLogicFollow data={info} />
+                        )}
                      </div>
                   </div>
 

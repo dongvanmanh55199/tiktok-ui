@@ -1,13 +1,9 @@
 import { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
-import { UserCurrentContext } from '~/components/UserCurrentContext'
 import { Context } from '~/components/PathContext'
-
-function Logout() {
-   const contextUser = useContext(UserCurrentContext)
+import Loading from '~/components/Loading'
+function Login() {
    const contextPath = useContext(Context)
-   contextUser.userCurrent = false
-   contextUser.dataUser = {}
    // useEffect(() => {
    //    async function login(url = '') {
    //       const response = await fetch(url, {
@@ -28,10 +24,16 @@ function Logout() {
    //    }, [])
    // }, [])
 
+   return (
+      <div>
+         <Loading />
+         <Navigate to={contextPath.path} />
+      </div>
+   )
    return <Navigate to={contextPath.path} />
 
    // {{API_ENDPOINT}}/api/auth/logout
    // return <Navigate to="/" />
 }
 
-export default Logout
+export default Login

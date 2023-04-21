@@ -9,7 +9,7 @@ const routes = {
    coin: '/coin',
    setting: '/setting',
    feedback: '/feedback',
-   // login: '/login',
+   login: '/login',
    logout: '/logout',
 }
 

@@ -1,9 +1,13 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import classNames from 'classnames/bind'
+import HeadlessTippy from '@tippyjs/react/headless'
 import Tippy from '@tippyjs/react'
 import styles from './VideoDetail.module.scss'
 import { Context } from '../PathContext'
+import { ConfirmContext } from '../ConfirmContext'
+
+import { Wrapper as PopperWrapper } from '~/components/Popper'
 // import { ModalContext } from '../ModalProvider'
 import { UserCurrentContext } from '../UserCurrentContext'
 import Image from '../Image/Image'
@@ -17,15 +21,19 @@ import {
    CloseIcon,
    PaperPlaneIcon,
    ShareSolidIcon,
-   EllipsisHorizontalIcon,
-   HeartSolidIcon,
    PrevIcon,
    NextIcon,
+   MoreIcon,
+   DeleteIcon,
+   EditIcon,
 } from '../Icons'
 import img from '~/assets/images'
 import AccountPreview from '../AccountPreview'
 import { ModalContext } from '../ModalProvider'
 import ModalForm from '../ModalForm'
+import Confirm from '../Confirm'
+import Comment from './Comment'
+import CommentContent from './CommentContent'
 const cx = classNames.bind(styles)
 function VideoDetail() {
    const contextUser = useContext(UserCurrentContext)
@@ -101,11 +109,7 @@ function VideoDetail() {
             })
       }
    }, [location.split('/')[3]])
-   // console.log(location.split('/')[3])
-
    const [indexArr, setIndexArr] = useState(index)
-   // console.log(context.data[indexArr].user_id)
-   // console.log(context.data[indexArr].user.is_followed)
    const [follow, setFollow] = useState(
       context?.data[indexArr].user.is_followed ? 'Unfollow' : 'Follow',
    )
@@ -115,8 +119,7 @@ function VideoDetail() {
    const [followState, setFollowState] = useState(
       context?.data[indexArr].user.is_followed,
    )
-
-   console.log(context, indexArr, index)
+   const confirmContext = useContext(ConfirmContext)
    return (
       <div className={cx('wrapper')}>
          <div className={cx('inner', 'video-detail')}>
@@ -144,9 +147,6 @@ function VideoDetail() {
                         }`}
                         onClick={() => {
                            setIndexArr((prev) => prev + 1)
-                           // let index = indexArr + 1
-                           // console.log('@', context?.data[index].user.nickname)
-                           // console.log('uuid', context?.data[index].uuid)
                         }}
                         className={cx('video-btn-next')}
                         rounded
@@ -181,7 +181,7 @@ function VideoDetail() {
                            />
                            <AccountPreview data={context?.data[indexArr]}>
                               <div className={cx('info-wrapper')}>
-                                 <div className={cx('nickname')}>
+                                 <div className={cx('nickname', 'font-size')}>
                                     {context?.data[indexArr]?.user?.nickname}
                                  </div>
                                  <div
@@ -190,8 +190,58 @@ function VideoDetail() {
                               </div>
                            </AccountPreview>
                         </Link>
+                        {contextUser.dataUser?.data?.id ===
+                           context?.data[indexArr]?.user_id && (
+                           <HeadlessTippy
+                              interactive
+                              delay={[0, 300]}
+                              offset={[12, 8]}
+                              placement="left"
+                              render={(attrs) => (
+                                 <div
+                                    className={cx('menu-list')}
+                                    tabIndex="-1"
+                                    {...attrs}
+                                 >
+                                    <PopperWrapper className={cx('custom-popper')}>
+                                       <Button
+                                          onClick={() => {
+                                             confirmContext.setDataType('Delete')
+                                             confirmContext.setDataTitle(
+                                                'Are you sure you want to delete this video?',
+                                             )
+                                             confirmContext.toggleConfirm()
+                                          }}
+                                          className={cx('more-btn-inner')}
+                                          leftIcon={<DeleteIcon />}
+                                       >
+                                          Delete
+                                       </Button>
+                                       <Button
+                                          className={cx('more-btn-inner')}
+                                          leftIcon={<EditIcon />}
+                                       >
+                                          Update
+                                       </Button>
+                                    </PopperWrapper>
+                                 </div>
+                              )}
+                           >
+                              <button className={cx('more-btn')}>
+                                 <MoreIcon />
+                              </button>
+                           </HeadlessTippy>
+                        )}
+
                         {followState ? (
                            <Button
+                              style={{
+                                 display:
+                                    contextUser.dataUser?.data?.id ===
+                                    context?.data[indexArr]?.user_id
+                                       ? 'none'
+                                       : 'inline-flex',
+                              }}
                               outline
                               onClick={() => {
                                  if (contextUser.userCurrent) {
@@ -221,6 +271,13 @@ function VideoDetail() {
                            </Button>
                         ) : (
                            <Button
+                              style={{
+                                 display:
+                                    contextUser.dataUser?.data?.id ===
+                                    context?.data[indexArr]?.user_id
+                                       ? 'none'
+                                       : 'inline-flex',
+                              }}
                               primary
                               onClick={() => {
                                  if (contextUser.userCurrent) {
@@ -359,71 +416,14 @@ function VideoDetail() {
                         />
                      </div>
                   </div>
-                  <div className={cx('cmt')}>
-                     {contextUser.userCurrent ? (
-                        comment?.data?.map((cmtItem, index) => (
-                           <div key={index} className={cx('cmt-inner')}>
-                              <div className={cx('cmt-l')}>
-                                 <Image
-                                    className={cx('cmt-avt')}
-                                    src={cmtItem?.user?.avatar}
-                                 />
-                                 <div className={cx('cmt-info')}>
-                                    <Link
-                                       to={`/@${cmtItem?.user?.nickname}`}
-                                       className={cx('cmt-nickname')}
-                                    >
-                                       {cmtItem?.user?.nickname}
-                                    </Link>
-                                    <div className={cx('cmt-text')}>
-                                       {cmtItem?.comment}
-                                    </div>
-                                    <div className={cx('cmt-time')}>
-                                       {cmtItem?.created_at}
-                                       <span className={cx('cmt-info')}> Reply</span>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div className={cx('cmt-r')}>
-                                 <EllipsisHorizontalIcon className={cx('cmt-icon')} />
-
-                                 <HeartSolidIcon className={cx('cmt-icon')} />
-                                 <div className={cx('cmt-number')}>
-                                    {cmtItem?.likes_count}
-                                 </div>
-                              </div>
-                           </div>
-                        ))
-                     ) : (
-                        <div className={cx('cmt-message')}>
-                           You need to login to use comments.
-                           <Button
-                              className={cx('cmt-btn')}
-                              text
-                              onClick={contextModal.handleShowModal}
-                           >
-                              Login
-                           </Button>
-                        </div>
-                     )}
-                  </div>
+                  <CommentContent data={context?.data[indexArr]} dataComment={comment} />
                </div>
-               <div className={cx('video-post')}>
-                  <div className={cx('video-post-inner')}>
-                     <input
-                        className={cx('cmt-input')}
-                        placeholder="Add comment..."
-                        type="text"
-                     />
-                     <Button small className={cx('cmt-btn')}>
-                        Post
-                     </Button>
-                  </div>
-               </div>
+               <Comment uuidVideo={location.split('/')[3]} />
             </div>
 
             {contextModal.active && <ModalForm onHide={contextModal.handleHideModal} />}
          </div>
+         {confirmContext.isConfirm && <Confirm idVideo={context?.data[indexArr].id} />}
       </div>
    )
 }

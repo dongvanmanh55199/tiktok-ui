@@ -7,6 +7,7 @@ import GlobalStyles from './components/GlobalStyles'
 import { ModalProvider } from './components/ModalProvider'
 import { UserCurrent } from './components/UserCurrentContext'
 import { PathContext } from './components/PathContext'
+import { Confirm } from './components/ConfirmContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -15,7 +16,9 @@ root.render(
       <ModalProvider>
          <UserCurrent>
             <PathContext>
-               <App />
+               <Confirm>
+                  <App />
+               </Confirm>
             </PathContext>
          </UserCurrent>
       </ModalProvider>

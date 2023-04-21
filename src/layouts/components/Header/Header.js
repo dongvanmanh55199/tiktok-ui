@@ -246,7 +246,7 @@ function Header({ stretch }) {
       {
          icon: <UserIcon />,
          title: 'View profile',
-         // to: '/userPath',
+         to: `/@${userContext.dataUser?.data?.nickname}`,
       },
       {
          icon: <CoinIcon />,

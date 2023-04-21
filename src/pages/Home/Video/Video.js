@@ -91,6 +91,7 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
       window.addEventListener('scroll', playVideoInViewport)
       return () => window.removeEventListener('scroll', playVideoInViewport)
    })
+   console.log()
    return (
       <div className={cx('wrapper')}>
          <Link to={`/@${data?.user.nickname}`}>
@@ -189,7 +190,13 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                   <Button
                      className="hide-on-mobile"
                      outline
-                     style={{ height: '28px' }}
+                     style={{
+                        height: '28px',
+                        display:
+                           contextUser.dataUser?.data?.id === data.user_id
+                              ? 'none'
+                              : 'inline-flex',
+                     }}
                      onClick={() => {
                         if (contextUser.userCurrent) {
                            fetch(
@@ -219,7 +226,13 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                   <Button
                      className="hide-on-mobile"
                      primary
-                     style={{ height: '28px' }}
+                     style={{
+                        height: '28px',
+                        display:
+                           contextUser.dataUser?.data?.id === data.user_id
+                              ? 'none'
+                              : 'inline-flex',
+                     }}
                      onClick={() => {
                         if (contextUser.userCurrent) {
                            fetch(

@@ -16,6 +16,7 @@ import Setting from '~/pages/Setting'
 import Feedback from '~/pages/Feedback'
 import Coin from '~/pages/Coin'
 import Logout from '~/pages/Logout'
+import Login from '~/pages/Login'
 import VideoDetail from '~/components/VideoDetail'
 
 //Public routes
@@ -73,6 +74,11 @@ const publicRoutes = [
    {
       path: config.routes.logout,
       component: Logout,
+      layout: StretchLayout,
+   },
+   {
+      path: config.routes.login,
+      component: Login,
       layout: StretchLayout,
    },
 ]

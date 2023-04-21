@@ -1,0 +1,34 @@
+.video-post {
+   border-top: 1px solid var(--separator-color);
+   height: 90px;
+}
+.video-post-inner {
+   display: flex;
+   margin: 20px;
+}
+.cmt-input {
+   font-size: 1.5rem;
+   // background-color: #f1f1f2;
+   color: var(--user-name);
+   background-color: var(--input-bg);
+   flex: 1;
+   padding: 15px;
+   border-radius: 10px;
+   &:not(:placeholder-shown) ~ .cmt-btn {
+      color: var(--primary);
+   }
+}
+.cmt-btn {
+   color: var(--info-count);
+}
+.cmt-message {
+   margin: 20px auto;
+   font-size: 1.4rem;
+   font-weight: 400;
+}
+.cmt-btn-l {
+   color: var(--primary);
+   min-width: 0;
+   padding: 0;
+   margin-left: 3px;
+}
