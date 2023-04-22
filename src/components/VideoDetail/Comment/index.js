@@ -25,8 +25,9 @@ function Comment({ uuidVideo }) {
          },
       ).then((data) => {
          if (data.status === 200) {
-            inputRef.current.value = ''
+            setCommentInput('')
             inputRef.current.focus()
+            userContext.handleRefreshApiCmt()
          }
       })
    }

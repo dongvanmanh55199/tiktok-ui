@@ -19,9 +19,7 @@ function Home() {
    const location = useLocation().pathname
    const contextPath = useContext(Context)
 
-   // console.log(contextPath)
-   // console.log(videos)
-   contextPath.data = videos
+   contextPath.handleSetData(videos)
 
    //Old Code
    // useEffect(() => {

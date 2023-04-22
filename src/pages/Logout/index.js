@@ -4,10 +4,10 @@ import { UserCurrentContext } from '~/components/UserCurrentContext'
 import { Context } from '~/components/PathContext'
 
 function Logout() {
-   const contextUser = useContext(UserCurrentContext)
+   const userContext = useContext(UserCurrentContext)
    const contextPath = useContext(Context)
-   contextUser.userCurrent = false
-   contextUser.dataUser = {}
+   userContext.handleLogout()
+   userContext.handleSetData({})
    // useEffect(() => {
    //    async function login(url = '') {
    //       const response = await fetch(url, {

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import HeadlessTippy from '@tippyjs/react/headless'
@@ -10,7 +10,7 @@ import { ConfirmContext } from '../ConfirmContext'
 import { Wrapper as PopperWrapper } from '~/components/Popper'
 // import { ModalContext } from '../ModalProvider'
 import { UserCurrentContext } from '../UserCurrentContext'
-import Image from '../Image/Image'
+// import Image from '../Image/Image'
 // import sugarVideo from '~/assets/video'
 import Button from '../Button/Button'
 import {
@@ -40,18 +40,18 @@ function VideoDetail() {
    const contextModal = useContext(ModalContext)
    const context = useContext(Context)
    const location = useLocation().pathname
-   let index = -1
+   let index
    // const [followState, setFollowState] = useState()
 
    if (context.path.includes('@')) {
-      context?.data?.find((item) => {
-         index++
+      context?.data?.find((item, i) => {
+         index = i
          // return item.uuid === 'ab771700-ec3d-4561-90c0-380eaec9a88e'
          return item.uuid === location.split('/')[3]
       })
    } else {
-      context?.data?.find((item) => {
-         index++
+      context?.data?.find((item, i) => {
+         index = i
          return item.uuid === location.split('/')[3]
          // return item.user_id === context.ui
       })
@@ -84,31 +84,36 @@ function VideoDetail() {
    // })
    // }
 
-   const [comment, setComment] = useState('')
+   // const [comment, setComment] = useState('')
+   // useEffect(() => {
+   //    if (contextUser.userCurrent) {
+   //       fetch(
+   //          `https://tiktok.fullstack.edu.vn/api/videos/${
+   //             location.split('/')[3]
+   //          }/comments`,
+   //          {
+   //             headers: {
+   //                Accept: 'application/json',
+   //                // 'Content-Type': 'multipart/form-data',
+   //                Authorization: 'Bearer ' + contextUser?.dataUser?.meta?.token,
+   //                // Authorization: 'basic ' + props.getToken(),
+   //             },
+   //          },
+   //       )
+   //          .then((res) => res.json())
+   //          .then((data) => {
+   //             if (data.status_code === 401) {
+   //                console.log('chua login')
+   //             }
+   //             setComment(data)
+   //          })
+   //    }
+   // }, [contextUser.refreshApiCmt])
+
    useEffect(() => {
-      if (contextUser.userCurrent) {
-         fetch(
-            `https://tiktok.fullstack.edu.vn/api/videos/${
-               location.split('/')[3]
-            }/comments`,
-            {
-               headers: {
-                  Accept: 'application/json',
-                  // 'Content-Type': 'multipart/form-data',
-                  Authorization: 'Bearer ' + contextUser?.dataUser?.meta?.token,
-                  // Authorization: 'basic ' + props.getToken(),
-               },
-            },
-         )
-            .then((res) => res.json())
-            .then((data) => {
-               if (data.status_code == 401) {
-                  console.log('chua login')
-               }
-               setComment(data)
-            })
-      }
+      contextUser.handleRefreshApiCmt()
    }, [location.split('/')[3]])
+
    const [indexArr, setIndexArr] = useState(index)
    const [follow, setFollow] = useState(
       context?.data[indexArr].user.is_followed ? 'Unfollow' : 'Follow',
@@ -154,9 +159,14 @@ function VideoDetail() {
                         <NextIcon />
                      </Button>
                   )}
-                  <Image
+                  {/* <Image
                      src={context?.data[indexArr]?.thumb_url}
                      className={cx('thumbnail')}
+                  /> */}
+                  <img
+                     className={cx('thumbnail')}
+                     src={context?.data[indexArr]?.thumb_url}
+                     onError={(e) => (e.target.src = img.noImage)}
                   />
 
                   <video
@@ -175,9 +185,14 @@ function VideoDetail() {
                            to={`/${location.split('/')[1]}`}
                            className={cx('video-info-detail-wrapper')}
                         >
-                           <Image
+                           {/* <Image
                               src={context?.data[indexArr]?.user?.avatar}
                               className={cx('avatar')}
+                           /> */}
+                           <img
+                              className={cx('avatar')}
+                              src={context?.data[indexArr]?.user?.avatar}
+                              onError={(e) => (e.target.src = img.noImage)}
                            />
                            <AccountPreview data={context?.data[indexArr]}>
                               <div className={cx('info-wrapper')}>
@@ -235,6 +250,7 @@ function VideoDetail() {
 
                         {followState ? (
                            <Button
+                              className="reset-min-width"
                               style={{
                                  display:
                                     contextUser.dataUser?.data?.id ===
@@ -261,6 +277,7 @@ function VideoDetail() {
                                        .then((data) => {
                                           setFollowState(data.data.is_followed)
                                           setFollow('Follow')
+                                          contextUser.handleRefreshApiFollow()
                                        })
                                  } else {
                                     contextModal.handleShowModal()
@@ -271,6 +288,7 @@ function VideoDetail() {
                            </Button>
                         ) : (
                            <Button
+                              className="reset-min-width"
                               style={{
                                  display:
                                     contextUser.dataUser?.data?.id ===
@@ -297,6 +315,7 @@ function VideoDetail() {
                                        .then((data) => {
                                           setFollowState(data.data.is_followed)
                                           setFollow('Unfollow')
+                                          contextUser.handleRefreshApiFollow()
                                        })
                                  } else {
                                     contextModal.handleShowModal()
@@ -416,7 +435,7 @@ function VideoDetail() {
                         />
                      </div>
                   </div>
-                  <CommentContent data={context?.data[indexArr]} dataComment={comment} />
+                  <CommentContent data={context?.data[indexArr]} />
                </div>
                <Comment uuidVideo={location.split('/')[3]} />
             </div>

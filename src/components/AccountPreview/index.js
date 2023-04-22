@@ -4,7 +4,7 @@ import classNames from 'classnames/bind'
 
 import { Wrapper as PopperWrapper } from '~/components/Popper'
 import styles from './AccountPreview.module.scss'
-import Image from '../Image/Image'
+import img from '~/assets/images'
 import Button from '../Button/Button'
 import { ModalContext } from '../ModalProvider'
 import { UserCurrentContext } from '../UserCurrentContext'
@@ -33,12 +33,17 @@ function AccountPreview({ data, children }) {
             <div tabIndex="-1" {...attrs}>
                <PopperWrapper className={cx('account-tab')}>
                   <div className={cx('header')}>
-                     <Image
+                     {/* <Image
                         className={cx('tippy-avatar')}
                         src={data?.user.avatar}
                         alt={data?.user.avatar}
+                     /> */}
+                     <img
+                        className={cx('tippy-avatar')}
+                        src={data?.user.avatar}
+                        alt={data?.user.avatar}
+                        onError={(e) => (e.target.src = img.noImage)}
                      />
-
                      {followState ? (
                         <Button
                            outline
@@ -60,6 +65,7 @@ function AccountPreview({ data, children }) {
                                     .then((data) => {
                                        setFollowState(data.data.is_followed)
                                        setFollow('Follow')
+                                       contextUser.handleRefreshApiFollow()
                                     })
                               } else {
                                  alert('Hay Login')
@@ -89,6 +95,7 @@ function AccountPreview({ data, children }) {
                                     .then((data) => {
                                        setFollowState(data.data.is_followed)
                                        setFollow('Unfollow')
+                                       contextUser.handleRefreshApiFollow()
                                     })
                               } else {
                                  context.handleShowModal()

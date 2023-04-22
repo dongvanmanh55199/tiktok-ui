@@ -4,10 +4,10 @@ import img from '~/assets/images'
 
 import classNames from 'classnames'
 import style from './Img.module.scss'
-function Image({ alt, src, className, fallback: customFallback = img.noImage }, ref) {
+function Image({ alt, src, className }, ref) {
    const [fallback, setFallback] = useState('')
    const handleError = () => {
-      setFallback(customFallback)
+      setFallback(img.noImage)
    }
 
    return (

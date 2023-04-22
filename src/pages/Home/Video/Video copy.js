@@ -214,7 +214,6 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                               .then((data) => {
                                  setFollowState(data.data.is_followed)
                                  setFollow('Follow')
-                                 contextUser.handleRefreshApiFollow()
                               })
                         } else {
                            context.handleShowModal()
@@ -251,7 +250,6 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                               .then((data) => {
                                  setFollowState(data.data.is_followed)
                                  setFollow('UnFollow')
-                                 contextUser.handleRefreshApiFollow()
                               })
                         } else {
                            context.handleShowModal()

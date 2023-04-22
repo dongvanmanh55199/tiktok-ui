@@ -58,19 +58,17 @@ function Login() {
       login(
          `https://tiktok.fullstack.edu.vn/api/auth/login?email=${inputEmail}&password=${inputPassword}`,
       ).then((data) => {
-         // if (data.status_code === 401 && data.status_code === 422) {
          if (data.status_code === 401 || data.status_code === 422) {
             setMessageLog(!messageLog)
-            // alert('Login fails because the email or password is incorrect.')
-
-            // context.handleHideModal()
          } else {
-            // setMessageSuccessLog(!messageSuccessLog)
-            // userContext.userCurrent = !userContext.userCurrent
-            userContext.userCurrent = true
-            // userContext.setUser()
-            // userContext.setUC()
-            userContext.dataUser = data
+            //old
+            // userContext.userCurrent = true
+            // userContext.dataUser = data
+
+            //new
+            // console.log(data)
+            userContext.handleLogin()
+            userContext.handleSetData(data)
 
             context.handleHideModal()
          }

@@ -7,15 +7,10 @@ import Button from '~/components/Button'
 function HandleLogicFollow({ data }) {
    const context = useContext(ModalContext)
    const contextUser = useContext(UserCurrentContext)
-   const [follow, setFollow] = useState(
-      () => (data.data.is_followed ? 'Unfollow' : 'Follow'),
-      // contextUser.followState ? 'Unfollow' : 'Follow',
-   )
-   const [followState, setFollowState] = useState(data.data.is_followed)
 
    return (
       <>
-         {followState ? (
+         {data.data.is_followed ? (
             <Button
                className="btn-min-width"
                outline
@@ -35,15 +30,14 @@ function HandleLogicFollow({ data }) {
                      )
                         .then((res) => res.json())
                         .then((data) => {
-                           setFollowState(data.data.is_followed)
-                           setFollow('Follow')
+                           contextUser.handleRefreshApiFollow()
                         })
                   } else {
                      context.handleShowModal()
                   }
                }}
             >
-               {follow}
+               Unfollow
             </Button>
          ) : (
             <Button
@@ -65,15 +59,14 @@ function HandleLogicFollow({ data }) {
                      )
                         .then((res) => res.json())
                         .then((data) => {
-                           setFollowState(data.data.is_followed)
-                           setFollow('Unfollow')
+                           contextUser.handleRefreshApiFollow()
                         })
                   } else {
                      context.handleShowModal()
                   }
                }}
             >
-               {follow}
+               Follow
             </Button>
          )}
       </>

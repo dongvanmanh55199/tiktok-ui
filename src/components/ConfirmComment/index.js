@@ -21,8 +21,8 @@ function ConfirmComment({ idCmt }) {
             Authorization: 'Bearer ' + userContext?.dataUser?.meta?.token,
          },
       }).then((data) => {
-         console.log(data.status)
-         if (data.status === '204') {
+         if (data.status === 204) {
+            userContext.handleRefreshApiCmt()
             setMessageLog(!messageLog)
          }
          confirmContext.toggleConfirmComment()

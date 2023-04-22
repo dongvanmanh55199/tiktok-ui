@@ -148,7 +148,7 @@ function Upload() {
             </div>
 
             <div className={cx('form')}>
-               <div className={cx('caption-wrap')}>
+               <div className={cx('caption-wrap', 'margin-top-upload-form')}>
                   <span className={cx('title')}>Caption</span>
                   <input
                      value={captionInput}

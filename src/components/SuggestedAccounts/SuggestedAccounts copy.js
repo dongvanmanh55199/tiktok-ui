@@ -17,7 +17,9 @@ const cx = classNames.bind(styles)
 function SuggestedAccounts({ sidebar, data, ...passProps }) {
    const context = useContext(ModalContext)
    const contextUser = useContext(UserCurrentContext)
+   const [follow, setFollow] = useState(() => (data.is_followed ? 'Unfollow' : 'Follow'))
 
+   const [followState, setFollowState] = useState(data.is_followed)
    // console.log(follow, data, data.id)
    // console.log(data)
    return (
@@ -40,7 +42,7 @@ function SuggestedAccounts({ sidebar, data, ...passProps }) {
                            alt={data?.avatar}
                         />
 
-                        {data.is_followed ? (
+                        {followState ? (
                            <Button
                               outline
                               onClick={() => {
@@ -59,14 +61,15 @@ function SuggestedAccounts({ sidebar, data, ...passProps }) {
                                     )
                                        .then((res) => res.json())
                                        .then((data) => {
-                                          contextUser.handleRefreshApiFollow()
+                                          setFollowState(data.data.is_followed)
+                                          setFollow('Follow')
                                        })
                                  } else {
                                     context.handleShowModal()
                                  }
                               }}
                            >
-                              Unfollow
+                              {follow}
                            </Button>
                         ) : (
                            <Button
@@ -87,14 +90,15 @@ function SuggestedAccounts({ sidebar, data, ...passProps }) {
                                     )
                                        .then((res) => res.json())
                                        .then((data) => {
-                                          contextUser.handleRefreshApiFollow()
+                                          setFollowState(data.data.is_followed)
+                                          setFollow('Unfollow')
                                        })
                                  } else {
                                     context.handleShowModal()
                                  }
                               }}
                            >
-                              Follow
+                              {follow}
                            </Button>
                         )}
                      </div>

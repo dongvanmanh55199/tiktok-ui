@@ -67,7 +67,8 @@ function Sidebar({ shrink }) {
          }
          fetchAPI()
       }
-   }, [contextUser.userCurrent])
+   }, [contextUser.refreshApiFollow])
+
    useEffect(() => {
       if (contextUser.userCurrent) {
          fetch(`https://tiktok.fullstack.edu.vn/api/me/followings?page=1`, {
@@ -83,7 +84,12 @@ function Sidebar({ shrink }) {
                setFollow(json.data)
             })
       }
+   }, [contextUser.refreshApiFollow])
+
+   useEffect(() => {
+      contextUser.handleRefreshApiFollow()
    }, [contextUser.userCurrent])
+
    // console.log(suggests)
    return (
       <div className={cx('wrapper', 'sidebar-rse', { shrink: shrink })}>

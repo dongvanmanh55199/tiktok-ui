@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import moment from 'moment/moment'
 import classNames from 'classnames/bind'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import HeadlessTippy from '@tippyjs/react/headless'
 
@@ -11,7 +11,7 @@ import { EllipsisHorizontalIcon, HeartSolidIcon, DeleteIcon, EditIcon } from '..
 
 import styles from './CommentContent.module.scss'
 
-import Image from '~/components/Image/Image'
+import img from '~/assets/images'
 import Button from '~/components/Button/Button'
 
 import { UserCurrentContext } from '~/components/UserCurrentContext'
@@ -19,20 +19,49 @@ import { ModalContext } from '~/components/ModalProvider'
 import { ConfirmContext } from '~/components/ConfirmContext'
 import ConfirmComment from '~/components/ConfirmComment'
 const cx = classNames.bind(styles)
-function CommentContent({ data, dataComment }) {
+function CommentContent({ data }) {
    const userContext = useContext(UserCurrentContext)
    const modalContext = useContext(ModalContext)
    const confirmContext = useContext(ConfirmContext)
    const [idCmt, setIdCmt] = useState()
-   // console.log(data?.user_id)
-   // console.log(dataComment?.data[0]?.user?.id)
+   const location = useLocation().pathname
+
+   const [comment, setComment] = useState('')
+   useEffect(() => {
+      if (userContext.userCurrent) {
+         fetch(
+            `https://tiktok.fullstack.edu.vn/api/videos/${
+               location.split('/')[3]
+            }/comments`,
+            {
+               headers: {
+                  Accept: 'application/json',
+                  // 'Content-Type': 'multipart/form-data',
+                  Authorization: 'Bearer ' + userContext?.dataUser?.meta?.token,
+                  // Authorization: 'basic ' + props.getToken(),
+               },
+            },
+         )
+            .then((res) => res.json())
+            .then((data) => {
+               if (data.status_code === 401) {
+                  console.log('chua login')
+               }
+               setComment(data)
+            })
+      }
+   }, [userContext.refreshApiCmt])
    return (
       <div className={cx('cmt')}>
          {userContext.userCurrent ? (
-            dataComment?.data?.map((cmtItem, index) => (
+            comment?.data?.map((cmtItem, index) => (
                <div key={index} className={cx('cmt-inner')}>
                   <div className={cx('cmt-l')}>
-                     <Image className={cx('cmt-avt')} src={cmtItem?.user?.avatar} />
+                     <img
+                        className={cx('cmt-avt')}
+                        src={cmtItem?.user?.avatar}
+                        onError={(e) => (e.target.src = img.noImage)}
+                     />
                      <div className={cx('cmt-info')}>
                         <Link
                            to={`/@${cmtItem?.user?.nickname}`}

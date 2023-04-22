@@ -4,7 +4,8 @@ import classNames from 'classnames/bind'
 import HeadlessTippy from '@tippyjs/react/headless'
 
 import styles from './Profile.module.scss'
-import Image from '~/components/Image'
+// import Image from '~/components/Image'
+import img from '~/assets/images'
 import {
    BanIcon,
    EllipsisHorizontalIcon,
@@ -58,28 +59,38 @@ function Profile() {
                setVideos(json.data.videos)
             })
       }
-   }, [data])
-   contextPath.path = data
-   contextPath.ui = videos[0]?.user_id
-   contextPath.data = videos
-
-   const isUserCurrent = data.includes(contextUser?.dataUser?.data?.nickname)
-   const [isUser, setIsUser] = useState(!isUserCurrent)
-
+   }, [contextUser.refreshApiFollow])
    useEffect(() => {
-      setIsUser(!isUser)
-   }, [isUserCurrent])
+      contextUser.handleRefreshApiFollow()
+   }, [data])
+
+   //old
+   // contextPath.path = data
+   // contextPath.ui = videos[0]?.user_id
+   // contextPath.data = videos
+
+   //new
+   contextPath.handleSetData(videos)
+   contextPath.handleSetPath(data)
+   contextPath.handleSetUi(videos[0]?.user_id)
+
    return (
       <div className={cx('wrapper')}>
          <div className={cx('info-container')}>
             {info && (
                <div className={cx('info')}>
                   <div className={cx('basic')}>
-                     <Image
+                     {/* <Image
                         className={cx('avatar', 'avatar-wh-profile')}
                         src={info.data.avatar}
                         alt={data.avatar}
+                     /> */}
+                     <img
+                        className={cx('avatar', 'avatar-wh-profile')}
+                        src={info.data.avatar}
+                        onError={(e) => (e.target.src = img.noImage)}
                      />
+
                      <div className={cx('text')}>
                         <div className={cx('username', 'nickname-font-size')}>
                            {info.data.nickname}
@@ -94,7 +105,7 @@ function Profile() {
                            {info.data.full_name ||
                               `${info.data.first_name} ${info.data.last_name}`}
                         </div>
-                        {isUser ? (
+                        {contextUser?.dataUser?.data?.id === info?.data?.id ? (
                            <Button outline leftIcon={<EditIcon />}>
                               Edit Profile
                            </Button>
