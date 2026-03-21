@@ -88,7 +88,7 @@ function VideoDetail() {
    // useEffect(() => {
    //    if (contextUser.userCurrent) {
    //       fetch(
-   //          `https://tiktok.fullstack.edu.vn/api/videos/${
+   //          `https://tiktok.f8.edu.vn/api/videos/${
    //             location.split('/')[3]
    //          }/comments`,
    //          {
@@ -262,7 +262,7 @@ function VideoDetail() {
                               onClick={() => {
                                  if (contextUser.userCurrent) {
                                     fetch(
-                                       `https://tiktok.fullstack.edu.vn/api/users/${context?.data[indexArr].user_id}/unfollow`,
+                                       `https://tiktok.f8.edu.vn/api/users/${context?.data[indexArr].user_id}/unfollow`,
                                        {
                                           method: 'POST',
                                           headers: {
@@ -300,7 +300,7 @@ function VideoDetail() {
                               onClick={() => {
                                  if (contextUser.userCurrent) {
                                     fetch(
-                                       `https://tiktok.fullstack.edu.vn/api/users/${context?.data[indexArr].user_id}/follow`,
+                                       `https://tiktok.f8.edu.vn/api/users/${context?.data[indexArr].user_id}/follow`,
                                        {
                                           method: 'POST',
                                           headers: {
