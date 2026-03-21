@@ -13,7 +13,7 @@ function ConfirmComment({ idCmt }) {
    const userContext = useContext(UserCurrentContext)
    const [messageLog, setMessageLog] = useState(false)
    const handleDelete = () => {
-      fetch(`https://tiktok.fullstack.edu.vn/api/comments/${idCmt}`, {
+      fetch(`https://tiktok.f8.edu.vn/api/comments/${idCmt}`, {
          method: 'DELETE',
          headers: {
             Accept: 'application/json',
