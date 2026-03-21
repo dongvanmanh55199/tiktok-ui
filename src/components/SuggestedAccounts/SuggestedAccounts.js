@@ -46,7 +46,7 @@ function SuggestedAccounts({ sidebar, data, ...passProps }) {
                               onClick={() => {
                                  if (contextUser.userCurrent) {
                                     fetch(
-                                       `https://tiktok.fullstack.edu.vn/api/users/${data.id}/unfollow`,
+                                       `https://tiktok.f8.edu.vn/api/users/${data.id}/unfollow`,
                                        {
                                           method: 'POST',
                                           headers: {
@@ -74,7 +74,7 @@ function SuggestedAccounts({ sidebar, data, ...passProps }) {
                               onClick={() => {
                                  if (contextUser.userCurrent) {
                                     fetch(
-                                       `https://tiktok.fullstack.edu.vn/api/users/${data.id}/follow`,
+                                       `https://tiktok.f8.edu.vn/api/users/${data.id}/follow`,
                                        {
                                           method: 'POST',
                                           headers: {
