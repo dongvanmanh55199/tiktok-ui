@@ -56,7 +56,7 @@ function Login() {
       }
 
       login(
-         `https://tiktok.fullstack.edu.vn/api/auth/login?email=${inputEmail}&password=${inputPassword}`,
+         `https://tiktok.f8.edu.vn/api/auth/login?email=${inputEmail}&password=${inputPassword}`,
       ).then((data) => {
          if (data.status_code === 401 || data.status_code === 422) {
             setMessageLog(!messageLog)
