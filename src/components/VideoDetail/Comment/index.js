@@ -14,7 +14,7 @@ function Comment({ uuidVideo }) {
 
    const handleSubmit = () => {
       fetch(
-         `https://tiktok.fullstack.edu.vn/api/videos/${uuidVideo}/comments?comment=${commentInput}`,
+         `https://tiktok.f8.edu.vn/api/videos/${uuidVideo}/comments?comment=${commentInput}`,
          {
             method: 'POST',
             headers: {
