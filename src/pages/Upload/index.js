@@ -88,7 +88,7 @@ function Upload() {
          })
          return response.json()
       }
-      login(`https://tiktok.fullstack.edu.vn/api/videos`).then((data) => {
+      login(`https://tiktok.f8.edu.vn/api/videos`).then((data) => {
          if (data.status_code === 422) {
             setMessageSuccessLog(!messageSuccessLog)
          } else {
