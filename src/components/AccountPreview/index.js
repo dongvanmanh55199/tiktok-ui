@@ -50,7 +50,7 @@ function AccountPreview({ data, children }) {
                            onClick={() => {
                               if (contextUser.userCurrent) {
                                  fetch(
-                                    `https://tiktok.fullstack.edu.vn/api/users/${data.user_id}/unfollow`,
+                                    `https://tiktok.f8.edu.vn/api/users/${data.user_id}/unfollow`,
                                     {
                                        method: 'POST',
                                        headers: {
@@ -80,7 +80,7 @@ function AccountPreview({ data, children }) {
                            onClick={() => {
                               if (contextUser.userCurrent) {
                                  fetch(
-                                    `https://tiktok.fullstack.edu.vn/api/users/${data.user_id}/follow`,
+                                    `https://tiktok.f8.edu.vn/api/users/${data.user_id}/follow`,
                                     {
                                        method: 'POST',
                                        headers: {
