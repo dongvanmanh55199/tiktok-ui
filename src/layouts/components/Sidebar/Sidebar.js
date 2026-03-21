@@ -71,7 +71,7 @@ function Sidebar({ shrink }) {
 
    useEffect(() => {
       if (contextUser.userCurrent) {
-         fetch(`https://tiktok.fullstack.edu.vn/api/me/followings?page=1`, {
+         fetch(`https://tiktok.f8.edu.vn/api/me/followings?page=1`, {
             method: 'GET',
             headers: {
                Accept: 'application/json',
