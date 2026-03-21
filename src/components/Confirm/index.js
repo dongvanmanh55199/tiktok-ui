@@ -13,7 +13,7 @@ function Confirm({ idVideo }) {
    const userContext = useContext(UserCurrentContext)
    const [messageLog, setMessageLog] = useState(false)
    const handleDelete = () => {
-      fetch(`https://tiktok.fullstack.edu.vn/api/videos/${idVideo}`, {
+      fetch(`https://tiktok.f8.edu.vn/api/videos/${idVideo}`, {
          method: 'DELETE',
          headers: {
             Accept: 'application/json',
