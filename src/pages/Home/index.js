@@ -47,7 +47,7 @@ function Home() {
             return response.json()
          }
          getVideos(
-            `https://tiktok.fullstack.edu.vn/api/videos?type=for-you&page=${page}`,
+            `https://tiktok.f8.edu.vn/api/videos?type=for-you&page=${page}`,
          ).then((data) => {
             const result = data.data
             setVideos((prev) => [...prev, ...result])
