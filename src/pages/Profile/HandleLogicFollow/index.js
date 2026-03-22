@@ -18,7 +18,7 @@ function HandleLogicFollow({ data }) {
                onClick={() => {
                   if (contextUser.userCurrent) {
                      fetch(
-                        `https://tiktok.fullstack.edu.vn/api/users/${data.data.id}/unfollow`,
+                        `https://tiktok.f8.edu.vn/api/users/${data.data.id}/unfollow`,
                         {
                            method: 'POST',
                            headers: {
@@ -47,7 +47,7 @@ function HandleLogicFollow({ data }) {
                onClick={() => {
                   if (contextUser.userCurrent) {
                      fetch(
-                        `https://tiktok.fullstack.edu.vn/api/users/${data.data.id}/follow`,
+                        `https://tiktok.f8.edu.vn/api/users/${data.data.id}/follow`,
                         {
                            method: 'POST',
                            headers: {
