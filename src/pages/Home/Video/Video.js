@@ -200,7 +200,7 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                      onClick={() => {
                         if (contextUser.userCurrent) {
                            fetch(
-                              `https://tiktok.fullstack.edu.vn/api/users/${data.user_id}/unfollow`,
+                              `https://tiktok.f8.edu.vn/api/users/${data.user_id}/unfollow`,
                               {
                                  method: 'POST',
                                  headers: {
@@ -237,7 +237,7 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                      onClick={() => {
                         if (contextUser.userCurrent) {
                            fetch(
-                              `https://tiktok.fullstack.edu.vn/api/users/${data.user_id}/follow`,
+                              `https://tiktok.f8.edu.vn/api/users/${data.user_id}/follow`,
                               {
                                  method: 'POST',
                                  headers: {
@@ -320,7 +320,7 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                            onClick={() => {
                               if (contextUser.userCurrent) {
                                  fetch(
-                                    `https://tiktok.fullstack.edu.vn/api/videos/${data?.uuid}/unlike`,
+                                    `https://tiktok.f8.edu.vn/api/videos/${data?.uuid}/unlike`,
                                     {
                                        method: 'POST',
                                        headers: {
@@ -350,7 +350,7 @@ function Video({ location, data, mute, volume, adjustVolume, toggleMuted }) {
                            onClick={() => {
                               if (contextUser.userCurrent) {
                                  fetch(
-                                    `https://tiktok.fullstack.edu.vn/api/videos/${data?.uuid}/like`,
+                                    `https://tiktok.f8.edu.vn/api/videos/${data?.uuid}/like`,
                                     {
                                        method: 'POST',
                                        headers: {
