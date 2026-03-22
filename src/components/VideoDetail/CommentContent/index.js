@@ -30,7 +30,7 @@ function CommentContent({ data }) {
    useEffect(() => {
       if (userContext.userCurrent) {
          fetch(
-            `https://tiktok.fullstack.edu.vn/api/videos/${
+            `https://tiktok.f8.edu.vn/api/videos/${
                location.split('/')[3]
             }/comments`,
             {
