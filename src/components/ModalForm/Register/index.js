@@ -31,7 +31,7 @@ function Register() {
       }
 
       register(
-         `https://tiktok.fullstack.edu.vn/api/auth/register?type=email&email=${inputEmail}&password=${inputPassword}`,
+         `https://tiktok.f8.edu.vn/api/auth/register?type=email&email=${inputEmail}&password=${inputPassword}`,
       ).then((data) => {
          if (data.status_code == 409 || data.status_code == 422) {
             setMessageLog(!messageLog)
