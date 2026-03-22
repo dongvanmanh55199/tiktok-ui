@@ -38,7 +38,7 @@ function Profile() {
 
    useEffect(() => {
       if (contextUser.userCurrent) {
-         fetch(`https://tiktok.fullstack.edu.vn/api/users${data}`, {
+         fetch(`https://tiktok.f8.edu.vn/api/users${data}`, {
             method: 'GET',
             headers: {
                Accept: 'application/json',
@@ -52,7 +52,7 @@ function Profile() {
                setVideos(json.data.videos)
             })
       } else {
-         fetch(`https://tiktok.fullstack.edu.vn/api/users${data}`)
+         fetch(`https://tiktok.f8.edu.vn/api/users${data}`)
             .then((response) => response.json())
             .then((json) => {
                setInfo(json)
